@@ -50,11 +50,20 @@ small dot/.style={fill=black,circle,scale=0.3}
 								y dir=reverse,
 								ymin=0.5,
 								ymax=10.5,
+								every axis x label/.append style= { at={(axis description cs:0.5,1.068)},
+%																	draw=red,
+																	anchor=south},
+								every axis y label/.append style= {	at={(axis description cs:0.072,0.5)},
+%																	draw=red,
+																	anchor=center},
+%								yticklabel style={draw=red},
+%								xticklabel style={draw=red},								
+%								clip = false,
 							  }
 }
 \pgfplotsset{							  
 	gtLabelsAxis/.append style={myStyleCommon,
-%								axis lines=none,
+								axis lines=none,
 								colormap={labelsGT}{color(0cm)=(bgColor);
 					 								color(1cm)=(lungColor);	
 					 								color(2cm)=(chestWallColor);
@@ -70,56 +79,38 @@ small dot/.style={fill=black,circle,scale=0.3}
 							    point meta min=0,
 							    point meta max=10,
 							    xmin=-0.5,xmax=9.5,
-%							    height=0cm,
+							    height=0cm,
 							  }				  
 }
 \tikzstyle{gtLabelsPlotStyle}=[scatter,only marks,mark=square*,mark size=5pt,domain=0:9,samples at={0,...,9}]
+\tikzstyle{stdDrawingStyle} = [scatter, only marks, mark size=3pt]
 
 
-\begin{axis}[confMatrix,name=siftConfMatrix,clip = false,
-every axis x label/.style= {at={(axis description cs:0.5,1.1)},draw=red,anchor=north},
-every axis y label/.append style= {at={(axis description cs:-0.1,0.5)},draw=red,anchor=east},
-yticklabel style={draw=red},
-xticklabel style={draw=red},
-]
-\addplot graphics [xmin=0.5,xmax=10.5,ymin=0.5,ymax=10.5] {LowLevelSIFTConfusionMatrixMean.png};
+\begin{axis}[	confMatrix,
+				name=siftConfMatrix,
+			]
+			\addplot graphics [xmin=0.5,xmax=10.5,ymin=0.5,ymax=10.5]{LowLevelSIFTConfusionMatrixMean.png};
 
-\addplot[
-scatter,
-only marks,
-mark size=3pt,
-scatter src=explicit,
-%point meta=explicit symbolic,
-]
-table[
-y=actualClass,x=estimatedClass,meta=siftMean
- ]{lowLevelFeaturesConfusion.dat};
- 
-\node[small dot,pin=120:{xlabel anchor}]     at (axis description cs:0.5,1.1) {};           
-\node[small dot,pin=-30:{ylabel anchor}]     at (axis description cs:-0.1,0.5) {};         
-
+			\addplot[stdDrawingStyle,scatter src=explicit]
+					table[	y=actualClass,
+							x=estimatedClass,
+							meta=siftMean
+ 						 ]{lowLevelFeaturesConfusion.dat};
 \end{axis}
 
 \begin{axis}[gtLabelsAxis,
 			 at=(siftConfMatrix.north),anchor=south,
 			 yshift=\gtLabelDistance,
-			 name=xGTLabels,
+			 name=xGTLabelsSIFT,
 			 ]
 			\addplot [gtLabelsPlotStyle,point meta=x] {0};
 \end{axis}
-
  
-\begin{axis}[gtLabelsAxis,%rotate=-90,yshift=-\gtLabelDistance,
-			height=0cm,
-			 name=yGTLabels,clip=false,
+\begin{axis}[	gtLabelsAxis,
+				rotate=-90,yshift=-\gtLabelDistance,
+			 	name=yGTLabelsSIFT,
 			 ]
-			\addplot [gtLabelsPlotStyle,point meta=x] {0};   
-%			\node[small dot,pin=125:{putaaaaaa}] at (axis description cs:0.5,0.5) {}; 
-%			\node[small dot,pin=120:{$(0,0)$}]     at (axis description cs:0,0) {};           
-%\node[small dot,pin=-30:{$(1,1)$}]     at (axis description cs:1,1) {};         
-%\node[small dot,pin=-90:{$(1.03,0.5)$}]at (axis description cs:1.03,0.5) {}; 
-
-			
+			\addplot [gtLabelsPlotStyle,point meta=x] {0};   	
 \end{axis}
 
 
