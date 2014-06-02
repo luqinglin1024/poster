@@ -16,7 +16,7 @@
 
 \begin{document}
 \begin{tikzpicture}
-\newcommand\confMatrixSize{7cm}
+\newcommand\confMatrixSize{17cm}
 \newcommand\gtLabelDistance{0.3cm}
 
 \tikzset{
@@ -83,7 +83,7 @@ small dot/.style={fill=black,circle,scale=0.3}
 							  }				  
 }
 \tikzstyle{gtLabelsPlotStyle}=[scatter,only marks,mark=square*,mark size=5pt,domain=0:9,samples at={0,...,9}]
-\tikzstyle{stdDrawingStyle} = [scatter, only marks, mark size=3pt]
+\tikzstyle{stdDrawingStyle} = [scatter, only marks, mark size=4pt]
 
 
 \begin{axis}[	confMatrix,
@@ -91,7 +91,19 @@ small dot/.style={fill=black,circle,scale=0.3}
 			]
 			\addplot graphics [xmin=0.5,xmax=10.5,ymin=0.5,ymax=10.5]{LowLevelSIFTConfusionMatrixMean.png};
 
-			\addplot[stdDrawingStyle,scatter src=explicit]
+			\addplot[stdDrawingStyle,scatter src=explicit,
+						visualization depends on=\thisrow{siftMean} \as \labela,
+			            visualization depends on=\thisrow{siftStd} \as \labelb,
+			            nodes near coords=\pgfmathprintnumber{\labela}/\pgfmathprintnumber{\labelb},
+			            every node near coord/.style={
+			               % black,
+			               % draw,
+			               % circle,
+			                inner sep=10pt,
+			                yshift=1ex,
+			                font=\tiny
+			            }
+					]
 					table[	y=actualClass,
 							x=estimatedClass,
 							meta=siftMean
@@ -115,11 +127,6 @@ small dot/.style={fill=black,circle,scale=0.3}
 
 
 \end{tikzpicture}
-
-\begin{tikzpicture}
-
-\end{tikzpicture}
-
 
 
 \end{document}
