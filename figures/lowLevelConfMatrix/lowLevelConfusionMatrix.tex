@@ -1,0 +1,120 @@
+\documentclass[border=2pt]{standalone}
+\usepackage{tikz}
+\usepackage{pgfplots}
+
+\definecolor{bgColor}{rgb}{0.0000, 0.0000, 0.0000}
+\definecolor{boundaryColor}{rgb}{0.8784, 0.8784, 0.7529}
+\definecolor{chestWallColor}{rgb}{0.5294, 0.7843, 0.6078}
+\definecolor{fatColor}{rgb}{0.9804, 0.5882, 0.1176}
+\definecolor{fibroGlandColor}{rgb}{1.0000, 1.0000, 0.0000}
+\definecolor{lesionColor}{rgb}{1.0000, 0.2510, 0.0000}
+\definecolor{lungColor}{rgb}{0.2353, 0.6078, 0.8235}
+\definecolor{pectoralColor}{rgb}{0.6510, 0.3490, 1.0000}
+\definecolor{ribColor}{rgb}{0.0000, 0.4510, 0.1961}
+\definecolor{skinColor}{rgb}{0.9804, 0.7255, 0.7451}
+\definecolor{unkTissueColor}{rgb}{0.6000, 0.3020, 0.2510}
+
+\begin{document}
+\begin{tikzpicture}
+\newcommand\confMatrixSize{7cm}
+\newcommand\gtLabelDistance{0.3cm}
+
+\tikzset{
+every pin/.style={fill=yellow!50!white,rectangle,rounded corners=3pt,font=\tiny},
+small dot/.style={fill=black,circle,scale=0.3}
+}
+
+\pgfplotsset{
+	myStyleCommon/.append style={	width=\confMatrixSize,height=\confMatrixSize,
+									scale only axis,
+									xlabel={Estimated Class},
+								    ylabel={Actual Class},
+								    yticklabels={},
+								    xticklabels={},
+									xticklabel pos=right,
+									xlabel near ticks,
+									xtick={1.5,2.5,...,9.5},
+									ytick={1.5,2.5,...,9.5},
+									grid,
+      }
+}
+
+\pgfplotsset{
+	confMatrix/.append	style={	myStyleCommon,
+								axis on top,
+								colormap/jet,
+								point meta min=0,
+								point meta max=1,
+								xmin=0.5,
+								xmax=10.5,
+								y dir=reverse,
+								ymin=0.5,
+								ymax=10.5,
+							  }
+}
+\pgfplotsset{							  
+	gtLabelsAxis/.append style={myStyleCommon,
+								axis lines=none,
+								colormap={labelsGT}{color(0cm)=(bgColor);
+					 								color(1cm)=(lungColor);	
+					 								color(2cm)=(chestWallColor);
+										 			color(3cm)=(ribColor);
+										 			color(4cm)=(pectoralColor);
+										 			color(5cm)=(fibroGlandColor); 
+										 			color(6cm)=(fatColor); 
+					 								color(7cm)=(skinColor);    
+								 					color(8cm)=(lesionColor);
+							 						color(9cm)=(boundaryColor); 
+					 								color(10cm)=(unkTissueColor); 
+					 								},
+							    point meta min=0,
+							    point meta max=10,
+							    xmin=-0.5,xmax=9.5,
+							    height=0cm,
+							  }				  
+}
+\tikzstyle{gtLabelsPlotStyle}=[scatter,only marks,mark=square*,mark size=5pt,domain=0:9,samples at={0,...,9}]
+
+
+\begin{axis}[confMatrix,name=siftConfMatrix,clip = false
+]
+\addplot graphics [xmin=0.5,xmax=10.5,ymin=0.5,ymax=10.5] {LowLevelSIFTConfusionMatrixMean.png};
+
+\addplot[
+scatter,
+only marks,
+mark size=3pt,
+scatter src=explicit,
+%point meta=explicit symbolic,
+]
+table[
+y=actualClass,x=estimatedClass,meta=siftMean
+ ]{lowLevelFeaturesConfusion.dat};
+ 
+\node[small dot,pin=120:{$(0,0)$}]     at (axis description cs:0,0) {};           
+\node[small dot,pin=-30:{$(1,1)$}]     at (axis description cs:1,1) {};         
+\node[small dot,pin=-90:{$(1.03,0.5)$}]at (axis description cs:1.03,0.5) {}; 
+\node[small dot,pin=125:{$(0.5,0.5)$}] at (axis description cs:0.5,0.5) {};    
+
+\end{axis}
+
+\begin{axis}[gtLabelsAxis,
+			 at=(siftConfMatrix.north),anchor=south,
+			 yshift=\gtLabelDistance,
+			 name=xGTLabels,
+			 ]
+			\addplot [gtLabelsPlotStyle,point meta=x] {0};
+\end{axis}
+
+ 
+\begin{axis}[gtLabelsAxis,rotate=-90,yshift=-\gtLabelDistance,
+			 name=yGTLabels,clip=false,
+			 ]
+			\addplot [gtLabelsPlotStyle,point meta=x] {0};   
+			\node[small dot,pin=125:{putaaaaaa}] at (xGTLabels.axis cs:0.5,0.5) {}; 
+\end{axis}
+
+
+\end{tikzpicture}
+
+\end{document}
