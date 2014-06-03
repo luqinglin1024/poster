@@ -69,39 +69,39 @@
 							  }				  
 }
 \tikzstyle{gtLabelsPlotStyle}=[scatter,only marks,mark=square*,mark size=5pt,domain=0:9,samples at={0,...,9}]
+\tikzstyle{stdDrawingStyle} = [scatter, only marks, mark size=4pt]
 
 
 \begin{axis}[confMatrix,name=siftConfMatrix]
-\addplot graphics [xmin=0.5,xmax=10.5,ymin=0.5,ymax=10.5] {LowLevelSIFTConfusionMatrixMean.png};
+            \addplot graphics [xmin=0.5,xmax=10.5,ymin=0.5,ymax=10.5] {LowLevelSIFTConfusionMatrixMean.png};
 
-\addplot[
-scatter,
-only marks,
-mark size=3pt,
-scatter src=explicit,
-]
-table[
-y=actualClass,x=estimatedClass,meta=siftMean
- ]{lowLevelFeaturesConfusion.dat};
- 
+			\addplot[stdDrawingStyle,
+					point meta=\thisrow{siftMean},
+			            nodes near coords*={xx}
+					]
+					table[	y=actualClass,
+							x=estimatedClass,
+							meta=siftMean
+ 						 ]{lowLevelFeaturesConfusion.dat};
 \end{axis}
 
 \begin{axis}[gtLabelsAxis,
 			 at=(siftConfMatrix.north),anchor=south,
 			 yshift=\gtLabelDistance,
-			 name=xGTLabels,
+			 name=xGTLabelsSIFT,
 			 ]
 			\addplot [gtLabelsPlotStyle,point meta=x] {0};
 \end{axis}
-
  
-\begin{axis}[gtLabelsAxis,rotate=-90,yshift=-\gtLabelDistance,
-			 name=yGTLabels,
+\begin{axis}[	gtLabelsAxis,
+				rotate=-90,yshift=-\gtLabelDistance,
+			 	name=yGTLabelsSIFT,
 			 ]
-			\addplot [gtLabelsPlotStyle,point meta=x] {0};   
+			\addplot [gtLabelsPlotStyle,point meta=x] {0};   	
 \end{axis}
 
 
 \end{tikzpicture}
+
 
 \end{document}
