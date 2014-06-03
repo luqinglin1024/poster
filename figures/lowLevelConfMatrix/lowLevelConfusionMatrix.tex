@@ -91,18 +91,12 @@ small dot/.style={fill=black,circle,scale=0.3}
 			]
 			\addplot graphics [xmin=0.5,xmax=10.5,ymin=0.5,ymax=10.5]{LowLevelSIFTConfusionMatrixMean.png};
 
-			\addplot[stdDrawingStyle,scatter src=explicit,
+			\addplot[stdDrawingStyle,
+					point meta=\thisrow{siftMean},
 						visualization depends on=\thisrow{siftMean} \as \labela,
 			            visualization depends on=\thisrow{siftStd} \as \labelb,
-			            nodes near coords=\pgfmathprintnumber{\labela}/\pgfmathprintnumber{\labelb},
-			            every node near coord/.style={
-			               % black,
-			               % draw,
-			               % circle,
-			                inner sep=10pt,
-			                yshift=1ex,
-			                font=\tiny
-			            }
+%\pgfmathsetmacro\foo{(\labela*100)}
+			            nodes near coords*={xx}%\pgfmathprintnumber{\labela},%\pgfmathparse{(\labela*100)}}/,%\pgfmathprintnumber{\pgfmathparse{(\labelb*100)}},
 					]
 					table[	y=actualClass,
 							x=estimatedClass,
