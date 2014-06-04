@@ -76,8 +76,13 @@
             \addplot graphics [xmin=0.5,xmax=10.5,ymin=0.5,ymax=10.5] {LowLevelSIFTConfusionMatrixMean.png};
 
 			\addplot[stdDrawingStyle,
+					 % we use ’point meta’ as color data...
 					point meta=\thisrow{siftMean},
-			            nodes near coords*={xx}
+					% ... therefore, we can’t use it as argument for nodes near coords ..
+					% ... look how to print the numbers at pgfplotstable.pdf manual
+			        nodes near coords*={\pgfmathprintnumber{\meanVal}},
+			        % ... which requires to define a visualization dependency:
+           visualization depends on={round(100*\thisrow{siftMean}) \as \meanVal},
 					]
 					table[	y=actualClass,
 							x=estimatedClass,
