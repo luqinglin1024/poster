@@ -46,7 +46,7 @@
 \input{acronyms.tex}
 
 \graphicspath{{figures/paperFigures/}}
-\graphicspath{{figures/lowLevelConfMatrix/}}
+%\graphicspath{{figures/lowLevelConfMatrix/}}
 \acresetall
 
 
@@ -58,13 +58,19 @@ xxxxxxxxxxxxxxxxxxxxxxxxxx
  
 }
 
-\block{xxx}{
-hello world !!
-\begin{tikzfigure}[Here is some caption]
-%\input{./figures/lowLevelConfMatrix/lowLevelConfusionMatrix.tex}
-  \draw [color=red] (0,0) rectangle (2,1) node [midway] {Cool};
+\block{xxxxxxxxxx}{
+\begin{tikzfigure}[\acs{sift} space. (a) Projected space colored according to \acs{gt} tissue labeling. (b) $P(\bar{x}_a)$. (c) $P(\omega)$.]
+\input{./figures/lowLevelPrior/lowLevelPrior.tex}
 \end{tikzfigure}
-}
+} 
+
+%\block{xxx}{
+%hello world !!
+%\begin{tikzfigure}[Here is some caption]
+%%\input{./figures/lowLevelConfMatrix/lowLevelConfusionMatrix.tex}
+%  \draw [color=red] (0,0) rectangle (2,1) node [midway] {Cool};
+%\end{tikzfigure}
+%}
 
 
 
