@@ -44,7 +44,6 @@
 \begin{document}\maketitle
 \input{acronyms.tex}
 
-
 \graphicspath{{figures/paperFigures/}}
 \acresetall
 
@@ -58,12 +57,12 @@ Experimental results are provided showing the validity of the proposed approach 
 
 \begin{columns} \column{0.45}
 
-%\block{Problem definition}{
-% \begin{tikzfigure}[Dataset sample. From left to right: image sample, accompanying multi-label \ac{gt}, tissue label \ac{gt} color-coding.]
-%      \centering
-%%	\input{./figures/gtExample/gtExample.tex}
-%\draw [color=red] (0,0) rectangle (2,1) node [midway] {Cool};
-%\end{tikzfigure}
+\block{Problem definition}{
+ \begin{tikzfigure}[Dataset sample. From left to right: image sample, accompanying multi-label \ac{gt}, tissue label \ac{gt} color-coding.]
+      \centering
+%	\input{./figures/gtExample/gtExample.tex}
+\draw [color=red] (0,0) rectangle (2,1) node [midway] {Cool};
+\end{tikzfigure}
 %}
 
 
@@ -95,7 +94,7 @@ scale=.6,
 minimum width=1pt,minimum height=1pt,
 }}
 
-\node[anchor=south west,inner sep=0, right=of occurrenceMap] {\includegraphics[trim = 5 5 18 0, clip,width=.12\textwidth]{classPrior}};
+\node[anchor=south west,inner sep=0, right=of occurrenceMap](imgNode) {\includegraphics[trim = 5 5 18 0, clip,width=.12\textwidth]{classPrior}};
 
 \draw[] (imgNode.south west) +(14pt,3.5pt) node[labelSt, draw=bgColor, fill=bgColor] (bgName) {} ;
 \draw[] node[labelSt,draw=lungColor, fill=lungColor,right=of bgName] (lungName) {};
