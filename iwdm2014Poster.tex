@@ -40,49 +40,29 @@
 %\usecolorstyle[colorOne=udgColor]{Russia} 
 \usecolorstyle[colorOne=udgColor]{Denmark} 
 
-\input{defineBreastGTlabelColors.tex}
+
 
 \begin{document}\maketitle
-\input{acronyms.tex}
-
-\graphicspath{{figures/paperFigures/}}
-%\graphicspath{{figures/lowLevelConfMatrix/}}
-\acresetall
 
 
 
 \begin{columns} \column{0.45}
 
-\block{Problem definition}{
-xxxxxxxxxxxxxxxxxxxxxxxxxx
- 
-}
 
-\block{xxxxxxxxxx}{
-\begin{tikzfigure}[\acs{sift} space. (a) Projected space colored according to \acs{gt} tissue labeling. (b) $P(\bar{x}_a)$. (c) $P(\omega)$.]
-\input{./figures/lowLevelPrior/lowLevelPrior.tex}
-\end{tikzfigure}
-} 
+
+
 
 \block{xxx}{
 hello world !!
-%\begin{tikzfigure}[Here is some caption]
-%%\input{./figures/lowLevelConfMatrix/lowLevelConfusionMatrix.tex}
-%  
-%\end{tikzfigure}
-\begin{tikzfigure}[\acs{sift} space. (a) Projected space colored according to \acs{gt} tissue labeling. (b) $P(\bar{x}_a)$. (c) $P(\omega)$.]
+\begin{tikzfigure}[some caption]
+%\input{./figures/lowLevelConfMatrix/lowLevelConfusionMatrix.tex}
 \begin{tikzpicture}
-\draw [color=red] (0,0) rectangle (2,1) node [midway] {Cool};
+%\draw [color=red] (0,0) rectangle (2,1) node [midway] {Cool};
+\input{./figures/lowLevelConfMatrix/lowLevelConfusionMatrix.tex}
 \end{tikzpicture}
 \end{tikzfigure}
 }
 
-
-
-
-
 \end{columns}
-\block[titleoffsety=-1cm,bodyoffsety=-1cm]{Sample document}{This poster...}
-%\note[targetoffsetx=24cm, targetoffsety=-9cm,radius=8cm,width=.75\textwidth,innersep=.4cm]{You can...}
-\note[targetoffsetx=0cm,targetoffsety=-9cm,radius=8cm,width=.5\textwidth,innersep=.4cm]{You can...}
+
 \end{document}
