@@ -3,12 +3,13 @@
 \usepackage{amsmath}
 \usepackage{epsf,graphicx,subfig}
 \setcounter{tocdepth}{3}
-\usepackage{color}
+\usepackage{xcolor}
 \usepackage{lineno}
 \usepackage[nolist]{acronym}
 \usepackage{epsf,graphicx,subfig}
 \usepackage{amssymb,amsmath}
 \usepackage{tikz}
+\usepackage{pgfplots}
 \usetikzlibrary{positioning}
 \usepackage{todonotes}
 \usepackage{standalone}
@@ -27,19 +28,15 @@
 %\usecolorstyle[colorOne=udgColor]{Russia} 
 \usecolorstyle[colorOne=udgColor]{Denmark} 
 
+\input{defineBreastGTlabelColors.tex}
+
 \begin{document}\maketitle
 \input{acronyms.tex}
 
 \graphicspath{{figures/paperFigures/}}
 \acresetall
 
-\block{Abstract}{
-Texture is a powerful cue for describing structures that show a high degree of similarity in their image intensity patterns. This paper describes the use of \acf{sift}, both as low-level and high-level descriptors, applied to differentiate the tissues present in breast US images. For the low-level texture descriptors case, \ac{sift} descriptors are extracted from a regular grid. The high-level texture descriptor is build as a \ac{bof} of \ac{sift} descriptors. 
-Experimental results are provided showing the validity of the proposed approach for describing the tissues in breast US images.
-}
-%\begin{keywords}
-%breast cancer, ultrasound, texture, SIFT
-%\end{keywords}
+
 
 \begin{columns} \column{0.45}
 
@@ -47,6 +44,12 @@ Experimental results are provided showing the validity of the proposed approach 
 xxxxxxxxxxxxxxxxxxxxxxxxxx
  
 }
+
+%\block{xxx}{
+%\begin{tikzfigure}[ ]
+%\input{./figures/lowLevelConfMatrix/lowLevelConfusionMatrix.tex}
+%\end{tikzfigure}
+%}
 
 
 
