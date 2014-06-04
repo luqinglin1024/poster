@@ -5,98 +5,98 @@
 \input{../../defineBreastGTlabelColors.tex}
 \begin{document}
 
-\newcommand\confMatrixSize{20cm}
-\newcommand\gtLabelDistance{0.3cm}
-
-\pgfplotsset{
-	myStyleCommon/.append style={	width=\confMatrixSize,height=\confMatrixSize,
-									scale only axis,
-									xlabel={Estimated Class},
-								    ylabel={Actual Class},
-								    yticklabels={},
-								    xticklabels={},
-									xticklabel pos=right,
-									xlabel near ticks,
-									xtick={1.5,2.5,...,9.5},
-									ytick={1.5,2.5,...,9.5},
-									grid,
-      }
-}
-
-\pgfplotsset{
-	confMatrix/.append	style={	myStyleCommon,
-								axis on top,
-								colormap/jet,
-								point meta min=0,
-								point meta max=1,
-								xmin=0.5,
-								xmax=10.5,
-								y dir=reverse,
-								ymin=0.5,
-								ymax=10.5,
-							  }
-}
-\pgfplotsset{							  
-	gtLabelsAxis/.append style={myStyleCommon,
-								axis lines=none,
-								colormap={labelsGT}{color(0cm)=(bgColor);
-					 								color(1cm)=(lungColor);	
-					 								color(2cm)=(chestWallColor);
-										 			color(3cm)=(ribColor);
-										 			color(4cm)=(pectoralColor);
-										 			color(5cm)=(fibroGlandColor); 
-										 			color(6cm)=(fatColor); 
-					 								color(7cm)=(skinColor);    
-								 					color(8cm)=(lesionColor);
-							 						color(9cm)=(boundaryColor); 
-					 								color(10cm)=(unkTissueColor); 
-					 								},
-							    point meta min=0,
-							    point meta max=10,
-							    xmin=-0.5,xmax=9.5,
-							    height=0cm,
-							  }				  
-}
-\tikzstyle{gtLabelsPlotStyle}=[scatter,only marks,mark=square*,mark size=5pt,domain=0:9,samples at={0,...,9}]
-\tikzstyle{stdDrawingStyle} = [scatter, only marks, mark size=4pt]
+%\newcommand\confMatrixSize{20cm}
+%\newcommand\gtLabelDistance{0.3cm}
+%
+%\pgfplotsset{
+%	myStyleCommon/.append style={	width=\confMatrixSize,height=\confMatrixSize,
+%									scale only axis,
+%									xlabel={Estimated Class},
+%								    ylabel={Actual Class},
+%								    yticklabels={},
+%								    xticklabels={},
+%									xticklabel pos=right,
+%									xlabel near ticks,
+%									xtick={1.5,2.5,...,9.5},
+%									ytick={1.5,2.5,...,9.5},
+%									grid,
+%      }
+%}
+%
+%\pgfplotsset{
+%	confMatrix/.append	style={	myStyleCommon,
+%								axis on top,
+%								colormap/jet,
+%								point meta min=0,
+%								point meta max=1,
+%								xmin=0.5,
+%								xmax=10.5,
+%								y dir=reverse,
+%								ymin=0.5,
+%								ymax=10.5,
+%							  }
+%}
+%\pgfplotsset{							  
+%	gtLabelsAxis/.append style={myStyleCommon,
+%								axis lines=none,
+%								colormap={labelsGT}{color(0cm)=(bgColor);
+%					 								color(1cm)=(lungColor);	
+%					 								color(2cm)=(chestWallColor);
+%										 			color(3cm)=(ribColor);
+%										 			color(4cm)=(pectoralColor);
+%										 			color(5cm)=(fibroGlandColor); 
+%										 			color(6cm)=(fatColor); 
+%					 								color(7cm)=(skinColor);    
+%								 					color(8cm)=(lesionColor);
+%							 						color(9cm)=(boundaryColor); 
+%					 								color(10cm)=(unkTissueColor); 
+%					 								},
+%							    point meta min=0,
+%							    point meta max=10,
+%							    xmin=-0.5,xmax=9.5,
+%							    height=0cm,
+%							  }				  
+%}
+%\tikzstyle{gtLabelsPlotStyle}=[scatter,only marks,mark=square*,mark size=5pt,domain=0:9,samples at={0,...,9}]
+%\tikzstyle{stdDrawingStyle} = [scatter, only marks, mark size=4pt]
 
 \begin{tikzpicture}
-\begin{axis}[confMatrix,name=siftConfMatrix]
-            \addplot graphics [xmin=0.5,xmax=10.5,ymin=0.5,ymax=10.5] {/home/sik/Work/escola/recerca/iwdm2014/poster/figures/lowLevelConfMatrix/LowLevelSIFTConfusionMatrixMean.png};
-
-			\addplot[stdDrawingStyle,
-					 % we use ’point meta’ as color data...
-					point meta=\thisrow{siftStd},
-					% ... therefore, we can’t use it as argument for nodes near coords ..
-					% ... look how to print the numbers at pgfplotstable.pdf manual
-			        nodes near coords*={$
-				        				\pgfmathprintnumber[fixed,precision=0]{\meanVal}
-				        				\pm
-				        				\pgfmathprintnumber[fixed,precision=1]{\stdVal}
-				        				$},
-			        % ... which requires to define a visualization dependency:
-           			visualization depends on={100*\thisrow{siftMean} \as \meanVal},
-           			visualization depends on={100*\thisrow{siftStd} \as \stdVal},
-					]
-					table[	y=actualClass,
-							x=estimatedClass,
- 						 ]{/home/sik/Work/escola/recerca/iwdm2014/poster/figures/lowLevelConfMatrix/lowLevelFeaturesConfusion.dat};
-\end{axis}
-
-\begin{axis}[gtLabelsAxis,
-			 at=(siftConfMatrix.north),anchor=south,
-			 yshift=\gtLabelDistance,
-			 name=xGTLabelsSIFT,
-			 ]
-			\addplot [gtLabelsPlotStyle,point meta=x] {0};
-\end{axis}
- 
-\begin{axis}[	gtLabelsAxis,
-				rotate=-90,yshift=-\gtLabelDistance,
-			 	name=yGTLabelsSIFT,
-			 ]
-			\addplot [gtLabelsPlotStyle,point meta=x] {0};   	
-\end{axis}
+%\begin{axis}[confMatrix,name=siftConfMatrix]
+%            \addplot graphics [xmin=0.5,xmax=10.5,ymin=0.5,ymax=10.5] {/home/sik/Work/escola/recerca/iwdm2014/poster/figures/lowLevelConfMatrix/LowLevelSIFTConfusionMatrixMean.png};
+%
+%			\addplot[stdDrawingStyle,
+%					 % we use ’point meta’ as color data...
+%					point meta=\thisrow{siftStd},
+%					% ... therefore, we can’t use it as argument for nodes near coords ..
+%					% ... look how to print the numbers at pgfplotstable.pdf manual
+%			        nodes near coords*={$
+%				        				\pgfmathprintnumber[fixed,precision=0]{\meanVal}
+%				        				\pm
+%				        				\pgfmathprintnumber[fixed,precision=1]{\stdVal}
+%				        				$},
+%			        % ... which requires to define a visualization dependency:
+%           			visualization depends on={100*\thisrow{siftMean} \as \meanVal},
+%           			visualization depends on={100*\thisrow{siftStd} \as \stdVal},
+%					]
+%					table[	y=actualClass,
+%							x=estimatedClass,
+% 						 ]{/home/sik/Work/escola/recerca/iwdm2014/poster/figures/lowLevelConfMatrix/lowLevelFeaturesConfusion.dat};
+%\end{axis}
+%
+%\begin{axis}[gtLabelsAxis,
+%			 at=(siftConfMatrix.north),anchor=south,
+%			 yshift=\gtLabelDistance,
+%			 name=xGTLabelsSIFT,
+%			 ]
+%			\addplot [gtLabelsPlotStyle,point meta=x] {0};
+%\end{axis}
+% 
+%\begin{axis}[	gtLabelsAxis,
+%				rotate=-90,yshift=-\gtLabelDistance,
+%			 	name=yGTLabelsSIFT,
+%			 ]
+%			\addplot [gtLabelsPlotStyle,point meta=x] {0};   	
+%\end{axis}
 
 \end{tikzpicture}
 
