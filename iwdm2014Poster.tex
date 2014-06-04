@@ -3,7 +3,7 @@
 \usepackage{amsmath}
 \usepackage{epsf,graphicx,subfig}
 \setcounter{tocdepth}{3}
-\usepackage{color}
+\usepackage{xcolor}
 \usepackage{lineno}
 \usepackage[nolist]{acronym}
 \usepackage{epsf,graphicx,subfig}
@@ -39,8 +39,11 @@
 %\usecolorstyle[colorOne=udgColor]{Russia} 
 \usecolorstyle[colorOne=udgColor]{Denmark} 
 
+\input{defineBreastGTlabelColors.tex}
+
 \begin{document}\maketitle
 \input{acronyms.tex}
+
 
 \graphicspath{{figures/paperFigures/}}
 \acresetall
@@ -55,56 +58,13 @@ Experimental results are provided showing the validity of the proposed approach 
 
 \begin{columns} \column{0.45}
 
-\block{Problem definition}{
- \begin{tikzfigure}[Dataset sample. From left to right: image sample, accompanying multi-label \ac{gt}, tissue label \ac{gt} color-coding.]
-      \centering
-%\subfloat[]{
-%\includegraphics[width=.26\textwidth]{pngImgs/000002.png}\,
-%\subfloat[]{
-\begin{tikzpicture}
-
-\node[anchor=south west,inner sep=0] (imgNode) at (0,0) {\includegraphics[width=.12\textwidth]{pngImgs/gt/000002.png}};
-
-\node[anchor=south east,inner sep=0] at (-8pt,0) {\includegraphics[width=.12\textwidth]{pngImgs/000002.png}};
-
-\definecolor{lungColor}{rgb}{0.2353, 0.6078, 0.8235}
-\definecolor{chestWallColor}{rgb}{0.5294, 0.7843, 0.6078}
-\definecolor{ribColor}{rgb}{0.0000, 0.4510, 0.1961}
-\definecolor{pectoralColor}{rgb}{0.6510, 0.3490, 1.0000}
-\definecolor{fibroGlandColor}{rgb}{1.0000, 1.0000, 0.0000}
-\definecolor{fatColor}{rgb}{0.9804, 0.5882, 0.1176}
-\definecolor{skinColor}{rgb}{0.9804, 0.7255, 0.7451}
-\definecolor{unkTissueColor}{rgb}{0.6000, 0.3020, 0.2510}
-\definecolor{bgColor}{rgb}{0.0000, 0.0000, 0.0000}
-\definecolor{lesionColor}{rgb}{1.0000, 0.2510, 0.0000}
-\definecolor{boundaryColor}{rgb}{0.8784, 0.8784, 0.7529}
-
-\tikzset{nameSt/.style=
-{anchor=north west,rectangle,
-node distance=15pt,
-minimum width=8pt,minimum height=8pt,
-}}
-%\begin{scriptsize}
-%
-\draw[] (imgNode.north east) +(8pt,0) node[nameSt, draw=chestWallColor, fill=chestWallColor,label=right:Chest wall] (cwName) {} ;
-\draw[] node[nameSt, draw=ribColor, fill=ribColor,below=of cwName,label=right:Rib] (ribName) {} ;
-\draw[] node[nameSt, draw=skinColor, fill=skinColor,below=of ribName,label=right:Skin layers] (skinName) {} ;
-%\draw[] node[nameSt, draw=unkTissueColor, fill=unkTissueColor,below=of skinName,label=right:Chest wall] (unkTissueName) {} ;
-
-\draw[] node[nameSt, draw=lesionColor, fill=lesionColor,below=of skinName,label=right:Lesion] (lesionName) {} ;
-\draw[] node[nameSt, draw=boundaryColor, fill=boundaryColor,below=of lesionName,label=right:Boundary] (boundaryName) {} ;
-
-\draw[] (imgNode.north east) +(8,0) node[nameSt,draw=lungColor, fill=lungColor,label=right:Air or lungs] (lungName) {};
-\draw[] node[nameSt, draw=pectoralColor, fill=pectoralColor,below=of lungName,label=right:Pectoral muscle] (pectoralName) {} ;
-\draw[] node[nameSt, draw=fibroGlandColor, fill=fibroGlandColor,below=of pectoralName,label=right:Fibro-glandular tissue] (fibroGlandName) {} ;
-\draw[] node[nameSt, draw=fatColor, fill=fatColor,below=of fibroGlandName,label=right:Adipose tissue] (fatName) {} ;
-\draw[] node[nameSt, draw=bgColor, fill=bgColor,below=of fatName,label=right:Background] (bgName) {} ;
-%
-%\end{scriptsize}
-
-\end{tikzpicture}
-\end{tikzfigure}
-}
+%\block{Problem definition}{
+% \begin{tikzfigure}[Dataset sample. From left to right: image sample, accompanying multi-label \ac{gt}, tissue label \ac{gt} color-coding.]
+%      \centering
+%%	\input{./figures/gtExample/gtExample.tex}
+%\draw [color=red] (0,0) rectangle (2,1) node [midway] {Cool};
+%\end{tikzfigure}
+%}
 
 
 \block{xxxxxxxxxx}{

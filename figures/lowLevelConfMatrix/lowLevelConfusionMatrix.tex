@@ -2,20 +2,9 @@
 \usepackage{tikz}
 \usepackage{pgfplots}
 
-\definecolor{bgColor}{rgb}{0.0000, 0.0000, 0.0000}
-\definecolor{boundaryColor}{rgb}{0.8784, 0.8784, 0.7529}
-\definecolor{chestWallColor}{rgb}{0.5294, 0.7843, 0.6078}
-\definecolor{fatColor}{rgb}{0.9804, 0.5882, 0.1176}
-\definecolor{fibroGlandColor}{rgb}{1.0000, 1.0000, 0.0000}
-\definecolor{lesionColor}{rgb}{1.0000, 0.2510, 0.0000}
-\definecolor{lungColor}{rgb}{0.2353, 0.6078, 0.8235}
-\definecolor{pectoralColor}{rgb}{0.6510, 0.3490, 1.0000}
-\definecolor{ribColor}{rgb}{0.0000, 0.4510, 0.1961}
-\definecolor{skinColor}{rgb}{0.9804, 0.7255, 0.7451}
-\definecolor{unkTissueColor}{rgb}{0.6000, 0.3020, 0.2510}
-
+\input{../../defineBreastGTlabelColors.tex}
 \begin{document}
-\begin{tikzpicture}
+
 \newcommand\confMatrixSize{20cm}
 \newcommand\gtLabelDistance{0.3cm}
 
@@ -71,13 +60,13 @@
 \tikzstyle{gtLabelsPlotStyle}=[scatter,only marks,mark=square*,mark size=5pt,domain=0:9,samples at={0,...,9}]
 \tikzstyle{stdDrawingStyle} = [scatter, only marks, mark size=4pt]
 
-
+\begin{tikzpicture}
 \begin{axis}[confMatrix,name=siftConfMatrix]
             \addplot graphics [xmin=0.5,xmax=10.5,ymin=0.5,ymax=10.5] {LowLevelSIFTConfusionMatrixMean.png};
 
 			\addplot[stdDrawingStyle,
 					 % we use ’point meta’ as color data...
-					point meta=\thisrow{siftMean},
+					point meta=\thisrow{siftStd},
 					% ... therefore, we can’t use it as argument for nodes near coords ..
 					% ... look how to print the numbers at pgfplotstable.pdf manual
 			        nodes near coords*={$
@@ -91,7 +80,6 @@
 					]
 					table[	y=actualClass,
 							x=estimatedClass,
-							meta=siftMean
  						 ]{lowLevelFeaturesConfusion.dat};
 \end{axis}
 
@@ -109,7 +97,6 @@
 			 ]
 			\addplot [gtLabelsPlotStyle,point meta=x] {0};   	
 \end{axis}
-
 
 \end{tikzpicture}
 
