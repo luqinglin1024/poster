@@ -15,21 +15,9 @@
 \usepackage{scalefnt}
 \usepackage{url}
 
-\usepackage{pgfplots}
+\input{includePgfplotsWorkaround.tex}
 
 \definecolor{udgColor}{RGB}{82,119,213}
-
-
-\usetikzlibrary{arrows,backgrounds,shadows}
-
-% define layers
-    \pgfdeclarelayer{foreground}
-    \pgfdeclarelayer{background}
-    \pgfdeclarelayer{backgroundlayer} 
-    \pgfdeclarelayer{notelayer}
-% tell TikZ how to stack them (back to front)
-    \pgfsetlayers{background,backgroundlayer,main,notelayer,foreground}
-
 
 \title{\acs{sift} texture description for understanding breast ultrasound images}
 \author{Joan Massich, Fabrice Meriaudeau, Melcior Sent{\'i}s, Sergi Ganau, Elsa~P{\'e}rez, Domenec Puig, Robert  Mart{\'i}, Arnau Oliver and Joan Mart{\'i}}
