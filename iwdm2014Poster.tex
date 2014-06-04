@@ -67,46 +67,7 @@ Experimental results are provided showing the validity of the proposed approach 
 
 \block{xxxxxxxxxx}{
 \begin{tikzfigure}[\acs{sift} space. (a) Projected space colored according to \acs{gt} tissue labeling. (b) $P(\bar{x}_a)$. (c) $P(\omega)$.]
-\begin{tikzpicture}
-
-
-\node[anchor=south east,inner sep=0] (mappedGTNode) at (0,0) {\includegraphics[trim=115 250 118 250,clip,height=.12\textwidth]{mapGTintoSIFT}};
-
-\node[anchor=south west,inner sep=0](occurrenceMap) at (-8pt,0) {\includegraphics[height=.12\textwidth]{siftOccurrences2}};
-
-
-\definecolor{lungColor}{rgb}{0.2353, 0.6078, 0.8235}
-\definecolor{chestWallColor}{rgb}{0.5294, 0.7843, 0.6078}
-\definecolor{ribColor}{rgb}{0.0000, 0.4510, 0.1961}
-\definecolor{pectoralColor}{rgb}{0.6510, 0.3490, 1.0000}
-\definecolor{fibroGlandColor}{rgb}{1.0000, 1.0000, 0.0000}
-\definecolor{fatColor}{rgb}{0.9804, 0.5882, 0.1176}
-\definecolor{skinColor}{rgb}{0.9804, 0.7255, 0.7451}
-\definecolor{unkTissueColor}{rgb}{0.6000, 0.3020, 0.2510}
-\definecolor{bgColor}{rgb}{0.0000, 0.0000, 0.0000}
-\definecolor{lesionColor}{rgb}{1.0000, 0.2510, 0.0000}
-\definecolor{boundaryColor}{rgb}{0.8784, 0.8784, 0.7529}
-\tikzset{labelSt/.style=
-{anchor=north west,rectangle,
-node distance=1.96pt,
-scale=.6,
-minimum width=1pt,minimum height=1pt,
-}}
-
-\node[anchor=south west,inner sep=0, right=of occurrenceMap](imgNode) {\includegraphics[trim = 5 5 18 0, clip,width=.12\textwidth]{classPrior}};
-
-\draw[] (imgNode.south west) +(14pt,3.5pt) node[labelSt, draw=bgColor, fill=bgColor] (bgName) {} ;
-\draw[] node[labelSt,draw=lungColor, fill=lungColor,right=of bgName] (lungName) {};
-\draw[] node[labelSt, draw=chestWallColor,right=of lungName, fill=chestWallColor] (cwName) {} ;
-\draw[] node[labelSt, draw=ribColor, fill=ribColor,right=of cwName] (ribName) {} ;
-\draw[] node[labelSt, draw=pectoralColor, fill=pectoralColor,right=of ribName] (pectoralName) {} ;
-\draw[] node[labelSt, draw=fibroGlandColor, fill=fibroGlandColor,right=of pectoralName] (fibroGlandName) {} ;
-\draw[] node[labelSt, draw=fatColor, fill=fatColor,right=of fibroGlandName] (fatName) {} ;
-\draw[] node[labelSt, draw=skinColor, fill=skinColor,right=of fatName] (skinName) {} ;
-\draw[] node[labelSt, draw=lesionColor, fill=lesionColor,right=of skinName] (lesionName) {} ;
-\draw[] node[labelSt, draw=boundaryColor, fill=boundaryColor,right=of lesionName] (boundaryName) {} ;
-
-\end{tikzpicture}
+\input{./figures/lowLevelPrior/lowLevelPrior.tex}
 \end{tikzfigure}
 } 
 
@@ -115,43 +76,18 @@ minimum width=1pt,minimum height=1pt,
 
 \column{0.45} \block{xxxxxxx}{
 \begin{tikzfigure}[Distribution of the \acs{sift} descriptors for some classes in the \ac{gt}.]
- \begin{tikzpicture}
-\tikzset{myNode/.style=
-{anchor=north west,rectangle,
-node distance=5pt,
-minimum width=8pt,minimum height=8pt,
-inner sep=0,
-}}
-
-\node[myNode, label=below:Background] (bgNode) at (0,0) {\includegraphics[width=.1\textwidth]{gtDistro/000.png}};
-\node[myNode, right=of bgNode, label=below:Air or lungs] (airNode) {\includegraphics[width=.1\textwidth]{gtDistro/001.png}};
-\node[myNode, right=of airNode, label=below:Chest wall] (cwNode) {\includegraphics[width=.1\textwidth]{gtDistro/002.png}};
-
-\node[myNode, right=of cwNode, label=below:Rib] (ribNode) {\includegraphics[width=.1\textwidth]{gtDistro/003.png}};
-
-\node[myNode, below=15pt of bgNode, label=below:Fibro-glandular] (fibNode) {\includegraphics[width=.1\textwidth]{gtDistro/005.png}};
-
-\node[myNode, right=of fibNode, label=below:Adipose tissue] (fatNode) {\includegraphics[width=.1\textwidth]{gtDistro/006.png}};
-\node[myNode, right=of fatNode, label=below:Skin layers] (skNode) {\includegraphics[width=.1\textwidth]{gtDistro/007.png}};
-\node[myNode, right=of skNode, label=below:Lesion] (lesionNode) {\includegraphics[width=.1\textwidth]{gtDistro/128.png}};
-
-\end{tikzpicture} 
+\input{./figures/lowLevelModelProbability/lowLevelModelProbability.tex}
 \end{tikzfigure}
 }
 
-%\begin{subcolumns} \subcolumn{.45} \block{Subcolumns}{If you...} \subcolumn{.5} \block{}{An example...} \end{subcolumns}
-%\block[titlewidthscale=.8,bodywidthscale=.9,titleoffsety=9.5mm,bodyoffsety=9mm]{Changing the Poster’s Appearance}{If the default...}
 
 \block{xxx}{
 \begin{tikzfigure}[ Qualitative evaluation of the \ac{map} labeling of the feature space.]
-
-\begin{tikzpicture}
-\node[anchor=south west,inner sep=0] (imgNode) at (0,0) {\includegraphics[trim = 91 230 90 230, clip,width=.1\textwidth]{labelingMAP.pdf}};
-
-\node[anchor=south east,inner sep=0] at (-8pt,0) {\includegraphics[trim = 85 230 180 230, clip,width=.1\textwidth]{intensityLabelingMAP.pdf}};
-\end{tikzpicture}
+\input{./figures/lowLevelMAP/lowLevelMAP.tex}
 \end{tikzfigure}
 }
+
+
 
 \block{xxx}{
 \begin{tikzfigure}[ \acs{sift}-\acs{bof} descriptors qualitative analysis. (Left) image example. (Right) Dictionary representation colored using the location of the keypoint location in fig.\,\ref{fig:siftMapping}a space. (1-8) Occurrence of the dictionary's key-points associated to each region highlighted in the original image.]
