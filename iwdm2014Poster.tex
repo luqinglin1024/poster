@@ -9,14 +9,26 @@
 \usepackage{epsf,graphicx,subfig}
 \usepackage{amssymb,amsmath}
 \usepackage{tikz}
-\usepackage{pgfplots}
 \usetikzlibrary{positioning}
 \usepackage{todonotes}
 \usepackage{standalone}
 \usepackage{scalefnt}
 \usepackage{url}
 
+\usepackage{pgfplots}
+
 \definecolor{udgColor}{RGB}{82,119,213}
+
+
+\usetikzlibrary{arrows,backgrounds,shadows}
+
+% define layers
+    \pgfdeclarelayer{foreground}
+    \pgfdeclarelayer{background}
+    \pgfdeclarelayer{backgroundlayer} 
+    \pgfdeclarelayer{notelayer}
+% tell TikZ how to stack them (back to front)
+    \pgfsetlayers{background,backgroundlayer,main,notelayer,foreground}
 
 
 \title{\acs{sift} texture description for understanding breast ultrasound images}
