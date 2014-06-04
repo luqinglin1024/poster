@@ -16,7 +16,7 @@
 
 \begin{document}
 \begin{tikzpicture}
-\newcommand\confMatrixSize{7cm}
+\newcommand\confMatrixSize{20cm}
 \newcommand\gtLabelDistance{0.3cm}
 
 \pgfplotsset{
@@ -80,9 +80,14 @@
 					point meta=\thisrow{siftMean},
 					% ... therefore, we can’t use it as argument for nodes near coords ..
 					% ... look how to print the numbers at pgfplotstable.pdf manual
-			        nodes near coords*={\pgfmathprintnumber{\meanVal}},
+			        nodes near coords*={$
+				        				\pgfmathprintnumber[fixed,precision=0]{\meanVal}
+				        				\pm
+				        				\pgfmathprintnumber[fixed,precision=1]{\stdVal}
+				        				$},
 			        % ... which requires to define a visualization dependency:
-           visualization depends on={round(100*\thisrow{siftMean}) \as \meanVal},
+           			visualization depends on={100*\thisrow{siftMean} \as \meanVal},
+           			visualization depends on={100*\thisrow{siftStd} \as \stdVal},
 					]
 					table[	y=actualClass,
 							x=estimatedClass,
