@@ -31,13 +31,52 @@
 \input{defineBreastGTlabelColors.tex}
 
 \begin{document}\maketitle
+\input{acronyms.tex}
+\acresetall
+
+\graphicspath{{figures/paperFigures/}}
 
 
+\block{Abstract}{
+Texture is a powerful cue for describing structures that show a high degree of similarity in their image intensity patterns. This paper describes the use of \acf{sift}, both as low-level and high-level descriptors, applied to differentiate the tissues present in breast US images. For the low-level texture descriptors case, \ac{sift} descriptors are extracted from a regular grid. The high-level texture descriptor is build as a \ac{bof} of \ac{sift} descriptors. 
+Experimental results are provided showing the validity of the proposed approach for describing the tissues in breast US images.
+}
+%\begin{keywords}
+%breast cancer, ultrasound, texture, SIFT
+%\end{keywords}
 
 \begin{columns} \column{0.45}
 
+\block{Problem definition}{
+ \begin{tikzfigure}[Dataset sample. From left to right: image sample, accompanying multi-label \ac{gt}, tissue label \ac{gt} color-coding.]
+      \centering
+	\input{./figures/gtExample/gtExample.tex}
+\end{tikzfigure}
+}
 
 
+\block{xxxxxxxxxx}{
+\begin{tikzfigure}[\acs{sift} space. (a) Projected space colored according to \acs{gt} tissue labeling. (b) $P(\bar{x}_a)$. (c) $P(\omega)$.]
+\input{./figures/lowLevelPrior/lowLevelPrior.tex}
+\end{tikzfigure}
+} 
+
+
+
+
+\column{0.45} \block{xxxxxxx}{
+\begin{tikzfigure}[Distribution of the \acs{sift} descriptors for some classes in the \ac{gt}.]
+\input{./figures/lowLevelModelProbability/lowLevelModelProbability.tex}
+\end{tikzfigure}
+}
+
+
+
+\block{xxx}{
+\begin{tikzfigure}[ Qualitative evaluation of the \ac{map} labeling of the feature space.]
+\input{./figures/lowLevelMAP/lowLevelMAP.tex}
+\end{tikzfigure}
+}
 
 
 \block{xxx}{
@@ -47,6 +86,18 @@ hello world !!
 \end{tikzfigure}
 }
 
-\end{columns}
 
+
+\block{xxx}{
+\begin{tikzfigure}[ \acs{sift}-\acs{bof} descriptors qualitative analysis. (Left) image example. (Right) Dictionary representation colored using the location of the keypoint location in fig.\,\ref{fig:siftMapping}a space. (1-8) Occurrence of the dictionary's key-points associated to each region highlighted in the original image.]
+\input{./figures/backOfFeatures/backOfFeatures.tex} 
+\end{tikzfigure}
+}
+
+
+
+\end{columns}
+\block[titleoffsety=-1cm,bodyoffsety=-1cm]{Sample document}{This poster...}
+%\note[targetoffsetx=24cm, targetoffsety=-9cm,radius=8cm,width=.75\textwidth,innersep=.4cm]{You can...}
+\note[targetoffsetx=0cm,targetoffsety=-9cm,radius=8cm,width=.5\textwidth,innersep=.4cm]{You can...}
 \end{document}
