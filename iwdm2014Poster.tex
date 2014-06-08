@@ -1,4 +1,4 @@
-\documentclass[25pt, a0paper, portrait, margin=0mm, innermargin=15mm, blockverticalspace=15mm, colspace=15mm, subcolspace=8mm]{tikzposter}
+\documentclass[25pt, a0paper, portrait, margin=0mm, innermargin=15mm, blockverticalspace=10mm, colspace=10mm, subcolspace=8mm]{tikzposter}
 
 \usepackage{amsmath}
 \usepackage{epsf,graphicx,subfig}
@@ -23,10 +23,8 @@
 \author{Joan Massich, Fabrice Meriaudeau, Melcior Sent{\'i}s, Sergi Ganau, Elsa~P{\'e}rez, Domenec Puig, Robert  Mart{\'i}, Arnau Oliver and Joan Mart{\'i}}
 
 %\institute{contact author: sik@eia.udg.edu}
-%\usetheme{Autumn}\usecolorstyle[colorPalette=BrownBlueOrange]{Germany}
-\usetheme{Simple}
-%\usecolorstyle[colorOne=udgColor]{Russia} 
-\usecolorstyle[colorOne=udgColor]{Denmark} 
+\usetheme{Autumn}\usecolorstyle[colorPalette=BrownBlueOrange]{Germany}
+%\usetheme{Simple} \usecolorstyle[colorOne=udgColor]{Denmark} 
 
 \input{defineBreastGTlabelColors.tex}
 
@@ -81,17 +79,17 @@ For the low-level texture descriptors case, \ac{sift} descriptors are extracted 
 
 \begin{columns} 
 
-\column{0.2} \block{}{
-\begin{tikzfigure}[\acs{sift} space. (a) Projected space colored according to \acs{gt} tissue labeling. (b) $P(\bar{x}_a)$. (c) $P(\omega)$.]
-  \input{./figures/lowLevelPrior/lowLevelPrior.tex}
-\end{tikzfigure}
-} 
-
-\column{0.2} \block{}{
+\column{0.35} \block{}{
 \begin{tikzfigure}[Distribution of the \acs{sift} descriptors for some classes in the \ac{gt}.]
 \input{./figures/lowLevelModelProbability/lowLevelModelProbability.tex}
 \end{tikzfigure}
 }
+
+\column{0.15} \block{}{
+\begin{tikzfigure}[\acs{sift} space. (a) Projected space colored according to \acs{gt} tissue labeling. (b) $P(\bar{x}_a)$. (c) $P(\omega)$.]
+  \input{./figures/lowLevelPrior/lowLevelPrior.tex}
+\end{tikzfigure}
+} 
 
 \column{0.2} \block{}{
 \begin{tikzfigure}[ Qualitative evaluation of the \ac{map} labeling of the feature space.]
