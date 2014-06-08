@@ -23,3 +23,8 @@
 *.synctex.gz
 *.tdo
 *.toc
+
+# ignore the files produced by latexmk
+.*.swp
+*.fdb_latexmk
+*.fls
