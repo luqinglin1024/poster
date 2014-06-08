@@ -61,7 +61,19 @@ Experimental results are provided showing the validity of the proposed approach 
 %\end{keywords}
 
 \block{\ac{sift} as a low-level descriptor, tested using \ac{map}}{
-For the low-level texture descriptors case, \ac{sift} descriptors are extracted from a regular grid. The high-level texture descriptor is build as a \ac{bof} of \ac{sift} descriptors. 
+  In this experiment, it has been analyzed how separable are the tissue classes present in breast ultrasound images, when using low-level descriptors based on \ac{sift} to encode \ac{us} texture.
+  Here a Bayesian framework has been assumed to perform the tissue discrimination and its results are presented both qualitatively (see fig.~\ref{fig:model}-\ref{fig:MAP}) and quantitatively (see fig.~\ref{fig:llConfMatrix}).
+  
+  All the pixel positions of all the images are used as a key-point for extracting a \ac{sift} descriptor and mapped in the $128D$ feature space of \ac{sift}.
+  This \ac{sift} space is then projected into a $2D$ space to visually assess how the tissue classes are distributed in such space.
+  From this projected space, models (see fig.~\ref{fig:model}) and priors (see fig.~\ref{fig:prior}) are extracted to infer the \ac{map} probability.
+  Figure~\ref{fig:MAP} shows this \ac{map} probability illustrating how the tissue classes are separated based on the observed data.
+
+In order to generate cross-validated quantitative results, the descriptors have been randomly sampled as follows: ($10.000\text{ samples} \times 10 \text{ classes}) \times 5 \text{ folds}$.
+ At each round 4 folds have been used for training the %\ac{ml} term in eq.\,\ref{eq:bayes} ($P(\bar{x}_a|\omega)$) 
+ models 
+ and the remaining fold has been used for testing.
+ Figure~\ref{fig:llConfMatrix} shows the corss-validated confusion matrix resulting from classifying breast tissues based on a Bayesian framework using either low-level \ac{sift} texture descriptors or intensity.
 }
 
 \begin{columns} 
@@ -69,35 +81,49 @@ For the low-level texture descriptors case, \ac{sift} descriptors are extracted 
 \column{0.35} \block{}{
 \begin{tikzfigure}[Distribution of the \acs{sift} descriptors for some classes in the \ac{gt}.]
 \input{./figures/lowLevelModelProbability/lowLevelModelProbability.tex}
+  \label{fig:model}
 \end{tikzfigure}
 }
 
 \column{0.15} \block{}{
 \begin{tikzfigure}[\acs{sift} space. (a) Projected space colored according to \acs{gt} tissue labeling. (b) $P(\bar{x}_a)$. (c) $P(\omega)$.]
   \input{./figures/lowLevelPrior/lowLevelPrior.tex}
+  \label{fig:prior}
 \end{tikzfigure}
 } 
 
 \column{0.15} \block{}{
 \begin{tikzfigure}[ Qualitative evaluation of the \ac{map} labeling of the feature space.]
 \input{./figures/lowLevelMAP/lowLevelMAP.tex}
+  \label{fig:MAP}
 \end{tikzfigure}
 }
 
 \column{0.40} \block{}{
 \begin{tikzfigure}[some caption]
 \input{./figures/lowLevelConfMatrix/lowLevelConfusionMatrix.tex}
+  \label{fig:llConfMatrix}
 \end{tikzfigure}
 } 
 
 \end{columns}
 
 \block{\ac{sift} as a high-level descriptor using \acf{bof}, tested using \ac{rbf}-\ac{svm} classifier}{
+The high-level texture descriptor is build as a \ac{bof} of \ac{sift} descriptors. 
+}
+
+\begin{columns}
+\column{0.60} \block{}{
 \begin{tikzfigure}[ \acs{sift}-\acs{bof} descriptors qualitative analysis. (Left) image example. (Right) Dictionary representation colored using the location of the keypoint location in fig.\,\ref{fig:siftMapping}a space. (1-8) Occurrence of the dictionary's key-points associated to each region highlighted in the original image.]
 \input{./figures/backOfFeatures/backOfFeatures.tex} 
 \end{tikzfigure}
 }
-
+\column{0.40} \block{}{
+\begin{tikzfigure}[some caption]
+\input{./figures/lowLevelConfMatrix/lowLevelConfusionMatrix.tex}
+\end{tikzfigure}
+} 
+\end{columns}
 
 
 %\block[titleoffsety=-1cm,bodyoffsety=-1cm]{Sample document}{This poster...}
