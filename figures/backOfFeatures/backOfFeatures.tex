@@ -5,8 +5,12 @@
 \input{../../defineBreastGTlabelColors.tex}
 
 \begin{document}
+\newcommand\mySize{6cm}
+%\pgfmathsetmacro\imHeight{\mySize * 3}
+\newcommand\imHeight{18cm}
+
 \begin{tikzpicture}
-\node[anchor=south west,inner sep=0] (imgNode) at (0,0) {\includegraphics[trim = 91 300 100 242, clip,width=.2\textwidth]{appearance1.pdf}};
+\node[anchor=south west,inner sep=0] (imgNode) at (0,0) {\includegraphics[trim = 91 300 100 242, clip,height=\imHeight]{appearance1.pdf}};
 
 \tikzset{nameSt/.style=
 {anchor=north west,rectangle,
@@ -16,17 +20,17 @@ inner sep=0,
 }}
 \begin{tiny}
 
-\draw[] (imgNode.north east) +(5pt,0) node[nameSt, label=below:Codebook] (dictionary) {\includegraphics[width=.10\textwidth,]{dictionary/01.png}} ;
-\draw[] (dictionary.north east) +(5pt,0) node[nameSt, label=below:(1)] (BoFi) {\includegraphics[width=.10\textwidth,]{dictionary/01Signatures/127.png}} ;
-\draw[] (BoFi.north east) +(5pt,0) node[nameSt, label=below:(2)] (BoFii) {\includegraphics[width=.02\textwidth,]{dictionary/01Signatures/037.png}} ;
+\draw[] (imgNode.north east) +(5pt,0) node[nameSt, label=below:Codebook] (dictionary) {\includegraphics[width=\mySize,]{dictionary/01.png}} ;
+\draw[] (dictionary.north east) +(5pt,0) node[nameSt, label=below:(1)] (BoFi) {\includegraphics[width=\mySize,]{dictionary/01Signatures/127.png}} ;
+\draw[] (BoFi.north east) +(5pt,0) node[nameSt, label=below:(2)] (BoFii) {\includegraphics[width=\mySize,]{dictionary/01Signatures/037.png}} ;
 
-\node[nameSt, below=of dictionary, label=below:(3)] (BoFiii) {\includegraphics[width=.02\textwidth,]{dictionary/01Signatures/054.png}} ;
-\node[nameSt, below=of BoFi, label=below:(4)] (BoFiv) {\includegraphics[width=.02\textwidth,]{dictionary/01Signatures/118.png}} ;
-\node[nameSt, below=of BoFii, label=below:(5)] (BoFv) {\includegraphics[width=.02\textwidth,]{dictionary/01Signatures/160.png}} ;
+\node[nameSt, below=of dictionary, label=below:(3)] (BoFiii) {\includegraphics[width=\mySize,]{dictionary/01Signatures/054.png}} ;
+\node[nameSt, below=of BoFi, label=below:(4)] (BoFiv) {\includegraphics[width=\mySize,]{dictionary/01Signatures/118.png}} ;
+\node[nameSt, below=of BoFii, label=below:(5)] (BoFv) {\includegraphics[width=\mySize,]{dictionary/01Signatures/160.png}} ;
 
-\node[nameSt, below=of BoFiii, label=below:(6)] (BoFvi) {\includegraphics[width=.02\textwidth,]{dictionary/01Signatures/061.png}} ;
-\node[nameSt, below=of BoFiv, label=below:(7)] (BoFvii) {\includegraphics[width=.02\textwidth,]{dictionary/01Signatures/077.png}} ;
-\node[nameSt, below=of BoFv, label=below:(8)] (BoFviii) {\includegraphics[width=.02\textwidth,]{dictionary/01Signatures/043.png}} ;
+\node[nameSt, below=of BoFiii, label=below:(6)] (BoFvi) {\includegraphics[width=\mySize,]{dictionary/01Signatures/061.png}} ;
+\node[nameSt, below=of BoFiv, label=below:(7)] (BoFvii) {\includegraphics[width=\mySize,]{dictionary/01Signatures/077.png}} ;
+\node[nameSt, below=of BoFv, label=below:(8)] (BoFviii) {\includegraphics[width=\mySize,]{dictionary/01Signatures/043.png}} ;
 
 \end{tiny}
 
