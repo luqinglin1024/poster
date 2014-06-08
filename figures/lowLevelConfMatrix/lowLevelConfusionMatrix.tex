@@ -5,7 +5,7 @@
 \input{../../defineBreastGTlabelColors.tex}
 \begin{document}
 
-\newcommand\confMatrixSize{20cm}
+\newcommand\confMatrixSize{10cm}
 \newcommand\gtLabelDistance{0.3cm}
 
 \pgfplotsset{
@@ -61,7 +61,10 @@
 \tikzstyle{stdDrawingStyle} = [scatter, only marks, mark size=4pt]
 
 \begin{tikzpicture}
-\begin{axis}[confMatrix,name=siftConfMatrix]
+\begin{axis}[confMatrix,
+             colorbar,colorbar to name={storedcolorbar},
+             name=siftConfMatrix,
+             ]
             \addplot graphics [xmin=0.5,xmax=10.5,ymin=0.5,ymax=10.5] {/home/sik/Work/escola/recerca/iwdm2014/poster/figures/lowLevelConfMatrix/LowLevelSIFTConfusionMatrixMean.png};
 
 			\addplot[stdDrawingStyle,
@@ -69,9 +72,9 @@
 					point meta=\thisrow{siftStd},
 					% ... therefore, we can’t use it as argument for nodes near coords ..
 					% ... look how to print the numbers at pgfplotstable.pdf manual
-			        nodes near coords*={$
+			        nodes near coords*={\tiny $
 				        				\pgfmathprintnumber[fixed,precision=0]{\meanVal}
-				        				\pm
+                        \hspace{-0.3em}\pm\hspace{-0.3em}
 				        				\pgfmathprintnumber[fixed,precision=1]{\stdVal}
 				        				$},
 			        % ... which requires to define a visualization dependency:
@@ -79,8 +82,8 @@
            			visualization depends on={100*\thisrow{siftStd} \as \stdVal},
 					]
 					table[	y=actualClass,
-							x=estimatedClass,
- 						 ]{/home/sik/Work/escola/recerca/iwdm2014/poster/figures/lowLevelConfMatrix/lowLevelFeaturesConfusion.dat};
+                  x=estimatedClass,
+                 ]{/home/sik/Work/escola/recerca/iwdm2014/poster/figures/lowLevelConfMatrix/lowLevelFeaturesConfusion.dat};
 \end{axis}
 
 \begin{axis}[gtLabelsAxis,
@@ -98,5 +101,50 @@
 			\addplot [gtLabelsPlotStyle,point meta=x] {0};   	
 \end{axis}
 
+\end{tikzpicture}
+%
+%
+\begin{tikzpicture}
+\begin{axis}[confMatrix,name=siftConfMatrix]
+            \addplot graphics [xmin=0.5,xmax=10.5,ymin=0.5,ymax=10.5] {/home/sik/Work/escola/recerca/iwdm2014/poster/figures/lowLevelConfMatrix/LowLevelSIFTConfusionMatrixMean.png};
+
+			\addplot[stdDrawingStyle,
+					 % we use ’point meta’ as color data...
+					point meta=\thisrow{siftStd},
+					% ... therefore, we can’t use it as argument for nodes near coords ..
+					% ... look how to print the numbers at pgfplotstable.pdf manual
+			        nodes near coords*={\tiny $
+				        				\pgfmathprintnumber[fixed,precision=0]{\meanVal}
+                        \hspace{-0.3em}\pm\hspace{-0.3em}
+				        				\pgfmathprintnumber[fixed,precision=1]{\stdVal}
+				        				$},
+			        % ... which requires to define a visualization dependency:
+           			visualization depends on={100*\thisrow{siftMean} \as \meanVal},
+           			visualization depends on={100*\thisrow{siftStd} \as \stdVal},
+					]
+					table[	y=actualClass,
+                  x=estimatedClass,
+                 ]{/home/sik/Work/escola/recerca/iwdm2014/poster/figures/lowLevelConfMatrix/lowLevelFeaturesConfusion.dat};
+\end{axis}
+
+\begin{axis}[gtLabelsAxis,
+			 at=(siftConfMatrix.north),anchor=south,
+			 yshift=\gtLabelDistance,
+			 name=xGTLabelsSIFT,
+			 ]
+			\addplot [gtLabelsPlotStyle,point meta=x] {0};
+\end{axis}
+ 
+\begin{axis}[	gtLabelsAxis,
+				rotate=-90,yshift=-\gtLabelDistance,
+			 	name=yGTLabelsSIFT,
+			 ]
+			\addplot [gtLabelsPlotStyle,point meta=x] {0};   	
+\end{axis}
+
+\end{tikzpicture}
+%
+\begin{tikzpicture}
+\ref{storedcolorbar}
 \end{tikzpicture}
 \end{document}
