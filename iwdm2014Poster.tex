@@ -1,63 +1,42 @@
 \documentclass[25pt, a0paper, portrait, margin=0mm, innermargin=15mm, blockverticalspace=15mm, colspace=15mm, subcolspace=8mm]{tikzposter}
 
-\usepackage{lipsum}% http://ctan.org/pkg/lipsum
-\usepackage{amsmath}
-\usepackage{epsf,graphicx,subfig}
-\setcounter{tocdepth}{3}
 \usepackage{xcolor}
-\usepackage{lineno}
-\usepackage[nolist]{acronym}
-\usepackage{epsf,graphicx,subfig}
-\usepackage{amssymb,amsmath}
+\usepackage{filecontents}% http://ctan.org/pkg/filecontents
+\usepackage{lipsum}% http://ctan.org/pkg/lipsum
 \usepackage{tikz}
-\usetikzlibrary{positioning}
-\usepackage{todonotes}
-\usepackage{standalone}
-\usepackage{scalefnt}
-\usepackage{url}
 
-\input{includePgfplotsWorkaround.tex}
-
-\definecolor{udgColor}{RGB}{82,119,213}
+\begin{filecontents*}{myDummyPictureCode.tex}
+  \begin{tikzfigure}[Some nice caption for the figure]
+    \centering
+    \begin{tikzpicture}
+      \draw [color=red] (0,0) rectangle (20,10) node [midway] {\huge myFigure};
+    \end{tikzpicture}
+  \end{tikzfigure}
+\end{filecontents*}
 
 \title{Title}
 \author{Name}
 
-%\institute{contact author: sik@eia.udg.edu}
 \usetheme{Autumn}\usecolorstyle[colorPalette=BrownBlueOrange]{Germany}
-
 
 \begin{document}\maketitle
 
 \begin{columns} 
-\column{0.45} \block{FigureOutside Block}{
+\column{0.7} \block{FigureOutside Block}{
   \lipsum[1]
 }
 
-\column{0.45} \block{}{
-%  \input{./myDummyPictureCode.tex}
-  \begin{tikzfigure}[Some nice caption for the figure]
-    \centering
-    \begin{tikzpicture}
-      \draw [color=red] (0,0) rectangle (2,1) node [midway] {Cool};
-    \end{tikzpicture}
-  \end{tikzfigure}
+\column{0.3} \block{}{
+\input{./myDummyPictureCode.tex}
 }
 \end{columns}
 
 % Text and figure Inside the Block
 \block{Text and figure Block}{
 \begin{columns} 
-\column{0.2} \lipsum[1]
-\column{0.2}
-  \begin{tikzfigure}[Some nice caption for the figure]
-    \centering
-    \begin{tikzpicture}
-      \draw [color=red] (0,0) rectangle (2,1) node [midway] {Cool};
-    \end{tikzpicture}
-  \end{tikzfigure}
+\column{0.7} \lipsum[1]
+\column{0.3} \input{./myDummyPictureCode.tex}
 \end{columns}
 }
-
 
 \end{document}
