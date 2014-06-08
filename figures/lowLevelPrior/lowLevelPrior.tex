@@ -6,9 +6,12 @@
 
 \begin{document}
 \begin{tikzpicture}
-%\node[anchor=south east,inner sep=0] (mappedGTNode) at (0,0) {\includegraphics[trim=115 250 118 250,clip,height=.12\textwidth]{mapGTintoSIFT}};
 
-\node[anchor=south west,inner sep=0](occurrenceMap) at (-8pt,0) {\includegraphics[height=.12\textwidth]{siftOccurrences2}};
+\newcommand\mySize{6cm} 
+  
+%\node[anchor=south east,inner sep=0] (mappedGTNode) at (0,0) {\includegraphics[trim=115 250 118 250,clip,height=\mySize]{mapGTintoSIFT}};
+
+\node[anchor=south west,inner sep=0](occurrenceMap) at (-8pt,0) {\includegraphics[height=\mySize]{siftOccurrences2}};
 
 
 \tikzset{labelSt/.style=
@@ -18,7 +21,7 @@ scale=.6,
 minimum width=1pt,minimum height=1pt,
 }}
 
-\node[anchor=south west,inner sep=0, right=of occurrenceMap](imgNode) {\includegraphics[trim = 5 5 18 0, clip,width=.12\textwidth]{classPrior}};
+\node[anchor=south west,inner sep=0, above=of occurrenceMap](imgNode) {\includegraphics[trim = 5 5 18 0, clip,width=\mySize]{classPrior}};
 
 \draw[] (imgNode.south west) +(14pt,3.5pt) node[labelSt, draw=bgColor, fill=bgColor] (bgName) {} ;
 \draw[] node[labelSt,draw=lungColor, fill=lungColor,right=of bgName] (lungName) {};
