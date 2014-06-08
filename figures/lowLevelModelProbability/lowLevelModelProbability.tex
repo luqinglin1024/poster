@@ -13,17 +13,19 @@ minimum width=8pt,minimum height=8pt,
 inner sep=0,
 }}
 
-\node[myNode, label=below:Background] (bgNode) at (0,0) {\includegraphics[width=.1\textwidth]{gtDistro/000.png}};
-\node[myNode, right=of bgNode, label=below:Air or lungs] (airNode) {\includegraphics[width=.1\textwidth]{gtDistro/001.png}};
-\node[myNode, right=of airNode, label=below:Chest wall] (cwNode) {\includegraphics[width=.1\textwidth]{gtDistro/002.png}};
+\newcommand\mySize{6cm}
 
-\node[myNode, right=of cwNode, label=below:Rib] (ribNode) {\includegraphics[width=.1\textwidth]{gtDistro/003.png}};
+\node[myNode, label=below:\small Background] (bgNode) at (0,0) {\includegraphics[width=\mySize]{gtDistro/000.png}};
+\node[myNode, right=of bgNode, label=below:\small tiny Air or lungs] (airNode) {\includegraphics[width=\mySize]{gtDistro/001.png}};
+\node[myNode, right=of airNode, label=below:\small Chest wall] (cwNode) {\includegraphics[width=\mySize]{gtDistro/002.png}};
 
-\node[myNode, below=15pt of bgNode, label=below:Fibro-glandular] (fibNode) {\includegraphics[width=.1\textwidth]{gtDistro/005.png}};
+\node[myNode, right=of cwNode, label=below:\small Rib] (ribNode) {\includegraphics[width=\mySize]{gtDistro/003.png}};
 
-\node[myNode, right=of fibNode, label=below:Adipose tissue] (fatNode) {\includegraphics[width=.1\textwidth]{gtDistro/006.png}};
-\node[myNode, right=of fatNode, label=below:Skin layers] (skNode) {\includegraphics[width=.1\textwidth]{gtDistro/007.png}};
-\node[myNode, right=of skNode, label=below:Lesion] (lesionNode) {\includegraphics[width=.1\textwidth]{gtDistro/128.png}};
+\node[myNode, below=40pt of bgNode, label=below:\small Fibro-glandular] (fibNode) {\includegraphics[width=\mySize]{gtDistro/005.png}};
+
+\node[myNode, right=of fibNode, label=below:\small Adipose tissue] (fatNode) {\includegraphics[width=\mySize]{gtDistro/006.png}};
+\node[myNode, right=of fatNode, label=below:\small Skin layers] (skNode) {\includegraphics[width=\mySize]{gtDistro/007.png}};
+\node[myNode, right=of skNode, label=below:\small Lesion] (lesionNode) {\includegraphics[width=\mySize]{gtDistro/128.png}};
 
 \end{tikzpicture} 
 \end{document}
