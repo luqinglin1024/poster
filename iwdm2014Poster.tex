@@ -36,7 +36,7 @@
 
 
 \begin{columns} 
-  \column{0.45}
+  \column{0.6}
 \block{Abstract}{
 Texture is a powerful cue for describing structures that show a high degree of similarity in their image intensity patterns. 
 This paper describes the use of \acf{sift}, both as low-level and high-level descriptors, applied to differentiate the tissues present in breast US images. 
@@ -47,7 +47,7 @@ This subset has been complemented with multi-label \ac{gt}, as illustrated in fi
 Experimental results are provided showing the validity of the proposed approach for describing the tissues in breast US images.
 
 }
-  \column{0.45}
+  \column{0.4}
 \block{}{
 \begin{tikzfigure}[Dataset sample. From left to right: image sample, accompanying multi-label \ac{gt}, tissue label \ac{gt} color-coding.]
   \centering
@@ -60,20 +60,7 @@ Experimental results are provided showing the validity of the proposed approach 
 %breast cancer, ultrasound, texture, SIFT
 %\end{keywords}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-\block{\ac{sift} as a low-level descriptor}{
+\block{\ac{sift} as a low-level descriptor, tested using \ac{map}}{
 For the low-level texture descriptors case, \ac{sift} descriptors are extracted from a regular grid. The high-level texture descriptor is build as a \ac{bof} of \ac{sift} descriptors. 
 }
 
@@ -105,7 +92,7 @@ For the low-level texture descriptors case, \ac{sift} descriptors are extracted 
 
 \end{columns}
 
-\block{xxx}{
+\block{\ac{sift} as a high-level descriptor using \acf{bof}, tested using \ac{rbf}-\ac{svm} classifier}{
 \begin{tikzfigure}[ \acs{sift}-\acs{bof} descriptors qualitative analysis. (Left) image example. (Right) Dictionary representation colored using the location of the keypoint location in fig.\,\ref{fig:siftMapping}a space. (1-8) Occurrence of the dictionary's key-points associated to each region highlighted in the original image.]
 \input{./figures/backOfFeatures/backOfFeatures.tex} 
 \end{tikzfigure}
@@ -113,7 +100,13 @@ For the low-level texture descriptors case, \ac{sift} descriptors are extracted 
 
 
 
-\block[titleoffsety=-1cm,bodyoffsety=-1cm]{Sample document}{This poster...}
+%\block[titleoffsety=-1cm,bodyoffsety=-1cm]{Sample document}{This poster...}
+\block{Conclusion}{
+The present study was designed to explore the usage of \ac{sift} feature space as a texture for characterizing the different tissues present in a breast \ac{us} image. 
+The usage of \ac{sift} either as a low-level or high-level texture descriptor has been evaluated in comparison to intensity features, which are the features most commonly used.
+The fact that \ac{sift} and intensity descriptors produce similar results, encourages further studies on using \ac{sift} texture descriptors characterizing breast tissues in \ac{us} images.
+
+}
 %\note[targetoffsetx=24cm, targetoffsety=-9cm,radius=8cm,width=.75\textwidth,innersep=.4cm]{You can...}
 \note[targetoffsetx=0cm,targetoffsety=-9cm,radius=8cm,width=.5\textwidth,innersep=.4cm]{You can...}
 \end{document}
