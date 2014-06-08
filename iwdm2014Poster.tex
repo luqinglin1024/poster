@@ -37,56 +37,75 @@
 \graphicspath{{figures/paperFigures/}}
 
 
+\begin{columns} 
+  \column{0.45}
 \block{Abstract}{
-Texture is a powerful cue for describing structures that show a high degree of similarity in their image intensity patterns. This paper describes the use of \acf{sift}, both as low-level and high-level descriptors, applied to differentiate the tissues present in breast US images. For the low-level texture descriptors case, \ac{sift} descriptors are extracted from a regular grid. The high-level texture descriptor is build as a \ac{bof} of \ac{sift} descriptors. 
+Texture is a powerful cue for describing structures that show a high degree of similarity in their image intensity patterns. 
+This paper describes the use of \acf{sift}, both as low-level and high-level descriptors, applied to differentiate the tissues present in breast US images. 
+
+For such a task, a subset of 16 images has been randomly selected from a larger dataset of 700 \ac{us} images acquired at the \emph{UDIAT Diagnostic Centre of Parc Taul\'{i}} in Sabadell (Catalunya), between 2010 and 2012.
+This subset has been complemented with multi-label \ac{gt}, as illustrated in figure~\ref{fig:dataExample}.
+
 Experimental results are provided showing the validity of the proposed approach for describing the tissues in breast US images.
+
 }
+  \column{0.45}
+\block{}{
+\begin{tikzfigure}[Dataset sample. From left to right: image sample, accompanying multi-label \ac{gt}, tissue label \ac{gt} color-coding.]
+  \centering
+  \input{./figures/gtExample/gtExample.tex}
+  \label{fig:dataExample}
+\end{tikzfigure}
+}
+\end{columns}
 %\begin{keywords}
 %breast cancer, ultrasound, texture, SIFT
 %\end{keywords}
 
-\begin{columns} \column{0.45}
 
-\block{Problem definition}{
- \begin{tikzfigure}[Dataset sample. From left to right: image sample, accompanying multi-label \ac{gt}, tissue label \ac{gt} color-coding.]
-      \centering
-	\input{./figures/gtExample/gtExample.tex}
-\end{tikzfigure}
+
+
+
+
+
+
+
+
+
+
+
+
+\block{\ac{sift} as a low-level descriptor}{
+For the low-level texture descriptors case, \ac{sift} descriptors are extracted from a regular grid. The high-level texture descriptor is build as a \ac{bof} of \ac{sift} descriptors. 
 }
 
+\begin{columns} 
 
-\block{xxxxxxxxxx}{
+\column{0.2} \block{}{
 \begin{tikzfigure}[\acs{sift} space. (a) Projected space colored according to \acs{gt} tissue labeling. (b) $P(\bar{x}_a)$. (c) $P(\omega)$.]
-\input{./figures/lowLevelPrior/lowLevelPrior.tex}
+  \input{./figures/lowLevelPrior/lowLevelPrior.tex}
 \end{tikzfigure}
 } 
 
-
-
-
-\column{0.45} \block{xxxxxxx}{
+\column{0.2} \block{}{
 \begin{tikzfigure}[Distribution of the \acs{sift} descriptors for some classes in the \ac{gt}.]
 \input{./figures/lowLevelModelProbability/lowLevelModelProbability.tex}
 \end{tikzfigure}
 }
 
-
-
-\block{xxx}{
+\column{0.2} \block{}{
 \begin{tikzfigure}[ Qualitative evaluation of the \ac{map} labeling of the feature space.]
 \input{./figures/lowLevelMAP/lowLevelMAP.tex}
 \end{tikzfigure}
 }
 
-
-\block{xxx}{
-hello world !!
+\column{0.2} \block{}{
 \begin{tikzfigure}[some caption]
 \input{./figures/lowLevelConfMatrix/lowLevelConfusionMatrix.tex}
 \end{tikzfigure}
-}
+} 
 
-
+\end{columns}
 
 \block{xxx}{
 \begin{tikzfigure}[ \acs{sift}-\acs{bof} descriptors qualitative analysis. (Left) image example. (Right) Dictionary representation colored using the location of the keypoint location in fig.\,\ref{fig:siftMapping}a space. (1-8) Occurrence of the dictionary's key-points associated to each region highlighted in the original image.]
@@ -96,7 +115,6 @@ hello world !!
 
 
 
-\end{columns}
 \block[titleoffsety=-1cm,bodyoffsety=-1cm]{Sample document}{This poster...}
 %\note[targetoffsetx=24cm, targetoffsety=-9cm,radius=8cm,width=.75\textwidth,innersep=.4cm]{You can...}
 \note[targetoffsetx=0cm,targetoffsety=-9cm,radius=8cm,width=.5\textwidth,innersep=.4cm]{You can...}
