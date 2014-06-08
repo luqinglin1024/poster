@@ -62,8 +62,9 @@
 
 \begin{tikzpicture}
 \begin{axis}[confMatrix,
-             colorbar,colorbar to name={storedcolorbar},
+%             colorbar,colorbar to name={storedcolorbar},
              name=siftConfMatrix,
+%             title=SIFT,
              ]
             \addplot graphics [xmin=0.5,xmax=10.5,ymin=0.5,ymax=10.5] {/home/sik/Work/escola/recerca/iwdm2014/poster/figures/lowLevelConfMatrix/LowLevelSIFTConfusionMatrixMean.png};
 
@@ -102,15 +103,19 @@
 \end{axis}
 
 \end{tikzpicture}
-%
+%intensityMean	intensityStd
 %
 \begin{tikzpicture}
-\begin{axis}[confMatrix,name=siftConfMatrix]
-            \addplot graphics [xmin=0.5,xmax=10.5,ymin=0.5,ymax=10.5] {/home/sik/Work/escola/recerca/iwdm2014/poster/figures/lowLevelConfMatrix/LowLevelSIFTConfusionMatrixMean.png};
+\begin{axis}[confMatrix,
+             colorbar,%colorbar to name={storedcolorbar},
+             name=intensityConfMatrix,
+%             title=Intensity,
+             ]
+            \addplot graphics [xmin=0.5,xmax=10.5,ymin=0.5,ymax=10.5] {/home/sik/Work/escola/recerca/iwdm2014/poster/figures/lowLevelConfMatrix/LowLevelIntensityConfusionMatrixMean.png};
 
 			\addplot[stdDrawingStyle,
 					 % we use ’point meta’ as color data...
-					point meta=\thisrow{siftStd},
+					point meta=\thisrow{intensityStd},
 					% ... therefore, we can’t use it as argument for nodes near coords ..
 					% ... look how to print the numbers at pgfplotstable.pdf manual
 			        nodes near coords*={\tiny $
@@ -119,8 +124,8 @@
 				        				\pgfmathprintnumber[fixed,precision=1]{\stdVal}
 				        				$},
 			        % ... which requires to define a visualization dependency:
-           			visualization depends on={100*\thisrow{siftMean} \as \meanVal},
-           			visualization depends on={100*\thisrow{siftStd} \as \stdVal},
+           			visualization depends on={100*\thisrow{intensityMean} \as \meanVal},
+           			visualization depends on={100*\thisrow{intensityStd} \as \stdVal},
 					]
 					table[	y=actualClass,
                   x=estimatedClass,
@@ -130,21 +135,21 @@
 \begin{axis}[gtLabelsAxis,
 			 at=(siftConfMatrix.north),anchor=south,
 			 yshift=\gtLabelDistance,
-			 name=xGTLabelsSIFT,
+			 name=xGTLabelsIntensity,
 			 ]
 			\addplot [gtLabelsPlotStyle,point meta=x] {0};
 \end{axis}
  
 \begin{axis}[	gtLabelsAxis,
 				rotate=-90,yshift=-\gtLabelDistance,
-			 	name=yGTLabelsSIFT,
+			 	name=yGTLabelsIntensity,
 			 ]
 			\addplot [gtLabelsPlotStyle,point meta=x] {0};   	
 \end{axis}
 
 \end{tikzpicture}
 %
-\begin{tikzpicture}
-\ref{storedcolorbar}
-\end{tikzpicture}
+%\begin{tikzpicture}
+%\ref{storedcolorbar}
+%\end{tikzpicture}
 \end{document}
