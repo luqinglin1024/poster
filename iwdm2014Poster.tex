@@ -111,18 +111,32 @@ The \ac{tpr} value obtained for the intensity case is $16.6\pm27.5\%$, whereas f
 \end{columns}
 
 \block{\ac{sift} as a high-level descriptor using \acf{bof}, tested using \ac{rbf}-\ac{svm} classifier}{
-The high-level texture descriptor is build as a \ac{bof} of \ac{sift} descriptors. 
+  Texture is an area property related to spatial repetition of structures, statistical similarities, or both.
+  In this experiment superpixels are extracted using \ac{qs} methodology to generate this areas. Some of this superpixels are illustrated in figure~\ref{fig:bof}.
+  For each superpixel, a high-level texture descriptor is build as a \ac{bof} of \ac{sift} descriptors. 
+  Initially the \ac{sift} space is clustered to generate a codebook. Here k-means procedure with $k=36$ is used to generate these codebooks. 
+  Figure~\ref{fig:bof} shows an arbitrary coloring of each cluster to illustrate how the codebook produce a hard quantification of the \ac{sift} space.
+  Finally the \ac{bof} descriptor for a superpixel corresponds to the occurrence study of the codebook using the \ac{sift} descriptors belonging to this particular superpixel (see 1-8 in fig\,\ref{fig:bof}). 
+
+  In order to produce quantitative results, dataset of superpixels is generated based on the images and the multi-label \ac{gt} available.
+  For a superpixel to be eligible, an area larger than $75\%$ need to belong to a single \ac{gt} label. The resulting dataset contains 20 folds of 8 superpixels (one per class). 
+
+  The experiment has been repeated for different coodebooks to take into account the variability of the coodebook within the results. 
+  Figure~\ref{fig:hlConfMatrix} compares the results of using \ac{bof} based on \ac{sift} or intensity for encoding \ac{us} texture. 
+  The sensitivity achieved is $29\pm3.6\%$ for the intenisty and $33.5\pm2.3\%$ for \ac{sift}.
 }
 
 \begin{columns}
 \column{0.60} \block{}{
 \begin{tikzfigure}[ \acs{sift}-\acs{bof} descriptors qualitative analysis. (Left) image example. (Right) Dictionary representation colored using the location of the keypoint location in fig.\,\ref{fig:siftMapping}a space. (1-8) Occurrence of the dictionary's key-points associated to each region highlighted in the original image.]
 \input{./figures/backOfFeatures/backOfFeatures.tex} 
+\label{fig:bof}
 \end{tikzfigure}
 }
 \column{0.40} \block{}{
 \begin{tikzfigure}[some caption]
 \input{./figures/lowLevelConfMatrix/lowLevelConfusionMatrix.tex}
+\label{fig:hlConfMatrix}
 \end{tikzfigure}
 } 
 \end{columns}
