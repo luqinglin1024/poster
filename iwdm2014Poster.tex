@@ -4,6 +4,9 @@
 \usepackage{filecontents}% http://ctan.org/pkg/filecontents
 \usepackage{lipsum}% http://ctan.org/pkg/lipsum
 \usepackage{tikz}
+\usepackage{multicol}
+
+\setlength{\columnsep}{2cm}
 
 \begin{filecontents*}{myDummyPictureCode.tex}
   \begin{tikzfigure}[Some nice caption for the figure]
@@ -32,7 +35,7 @@
 \end{columns}
 
 % Text and figure Inside the Block
-\block{Text and figure Block}{
+\block{Text and figure Block using COLUMNS}{
 \begin{columns} 
 \column{0.7} \lipsum[1]
 \column{0.3} \input{./myDummyPictureCode.tex}
@@ -40,7 +43,7 @@
 }
 
 % Text and figure Inside the Block using minipage
-\block{Text and figure Block}{
+\block{Text and figure Block using MINIPAGE}{
   \begin{minipage}[t]{0.7\linewidth}
     \lipsum[1]
   \end{minipage}%
@@ -50,5 +53,26 @@
   \end{minipage}
 }
 
+% playing with multicolumn text
+\block{Text and figure Block using MULTICOLS}{
+  \begin{multicols*}{3}
+    \lipsum[1]
+    \input{./myDummyPictureCode.tex}
+  \end{multicols*}
+}
+
+% playing with multicolumn text
+\block{Text and figure Block using MINIPAGE and MULTICOLS}{
+  \begin{minipage}[t]{0.7\linewidth}
+  \begin{multicols*}{2}
+    \lipsum[1]
+  \end{multicols*}
+  \end{minipage}%
+  %
+  \begin{minipage}[t]{0.3\linewidth}
+%    \vpace{-10cm}
+    \input{./myDummyPictureCode.tex}
+  \end{minipage}
+}
 
 \end{document}
