@@ -39,4 +39,16 @@
 \end{columns}
 }
 
+% Text and figure Inside the Block using minipage
+\block{Text and figure Block}{
+  \begin{minipage}[t]{0.7\linewidth}
+    \lipsum[1]
+  \end{minipage}%
+  %
+  \begin{minipage}[t]{0.3\linewidth}
+    \input{./myDummyPictureCode.tex}
+  \end{minipage}
+}
+
+
 \end{document}
