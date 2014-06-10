@@ -5,6 +5,7 @@
 \usepackage{lipsum}% http://ctan.org/pkg/lipsum
 \usepackage{tikz}
 \usepackage{multicol}
+\usepackage{adjustbox}
 
 \setlength{\columnsep}{2cm}
 
@@ -48,9 +49,11 @@
     \lipsum[1]
   \end{minipage}%
   %
+  \begin{adjustbox}{valign=t}
   \begin{minipage}[t]{0.3\linewidth}
     \input{./myDummyPictureCode.tex}
   \end{minipage}
+  \end{adjustbox}
 }
 
 % playing with multicolumn text
@@ -69,10 +72,11 @@
   \end{multicols*}
   \end{minipage}%
   %
+  \begin{adjustbox}{valign=t}
   \begin{minipage}[t]{0.3\linewidth}
-%    \vpace{-10cm}
     \input{./myDummyPictureCode.tex}
   \end{minipage}
+  \end{adjustbox}
 }
 
 \end{document}
