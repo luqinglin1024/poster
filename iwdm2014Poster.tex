@@ -18,32 +18,29 @@
   \end{tikzfigure}
 \end{filecontents*}
 
-\title{Title}
+\title{ Text and figure Block using MINIPAGE }
 \author{Name}
 
 \usetheme{Autumn}\usecolorstyle[colorPalette=BrownBlueOrange]{Germany}
 
 \begin{document}\maketitle
 
-\begin{columns} 
-\column{0.7} \block{FigureOutside Block}{
-  \lipsum[1]
-}
-
-\column{0.3} \block{}{
-\input{./myDummyPictureCode.tex}
-}
-\end{columns}
-
-% Text and figure Inside the Block
-\block{Text and figure Block using COLUMNS}{
-\begin{columns} 
-\column{0.7} \lipsum[1]
-\column{0.3} \input{./myDummyPictureCode.tex}
-\end{columns}
-}
-
 % Text and figure Inside the Block using minipage
+\block{}{
+  \fbox{
+  \begin{minipage}[t]{0.7\linewidth}
+    \lipsum[1]
+  \end{minipage}%
+  }
+  %
+  \fbox{
+  \begin{minipage}[t]{0.3\linewidth}
+    \input{./myDummyPictureCode.tex}
+  \end{minipage} 
+  }
+}
+
+% Text and figure Inside the Block using minipage aligned using adjustbox
 \block{Text and figure Block using MINIPAGE}{
   \fbox{
   \begin{minipage}[t]{0.7\linewidth}
@@ -60,14 +57,6 @@
   }
   \end{adjustbox}
   }
-}
-
-% playing with multicolumn text
-\block{Text and figure Block using MULTICOLS}{
-  \begin{multicols*}{3}
-    \lipsum[1]
-    \input{./myDummyPictureCode.tex}
-  \end{multicols*}
 }
 
 % playing with multicolumn text
