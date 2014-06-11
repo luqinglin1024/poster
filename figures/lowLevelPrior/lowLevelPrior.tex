@@ -19,17 +19,6 @@ Lsion,  163848,	0.065
 Bound,  81082, 	0.032
 }\occurrenceDataTable
 
-\pgfplotstableread{
-Criterion   Rapperswil  Palermo Jeddah
-Turquoise       3620        15749       42754
-Yellow      2739        15109       42240
-Purple      3710        16146       40533
-Red           714         9306      28919
-Blue        2997          6840  11614
-Orange      1589          4992  11786
-Green       2122        11154   28747
-}\datatable
-
 \input{../../defineBreastGTlabelColors.tex}
 
 \pgfplotscreateplotcyclelist{colorbrewer-RYB}{
@@ -57,25 +46,28 @@ Green       2122        11154   28747
 \begin{axis}[ 
         ybar=0pt,
         /pgf/bar shift=0pt,scale only axis,
-        width=0.74\textwidth/3,
-        yticklabel style={text width=0.035\textwidth, align=right, inner xsep=0pt, xshift=-0.005\textwidth},
-        ylabel=kWh, ylabel style={text height=0.02\textwidth,inner ysep=0pt},
-        enlarge x limits=0.15,
+%        width=0.74\textwidth/3,
+        %yticklabel style={text width=0.035\textwidth, align=right, inner xsep=0pt, xshift=-0.005\textwidth},
+        %ylabel=kWh,
+        %ylabel style={text height=0.02\textwidth,inner ysep=0pt},
+        %enlarge x limits=0.15,
         ymin=0,
         xtick=\empty,
         tickpos=left,
-        scaled y ticks=base 10:-3,
+        scaled y ticks=base 10:2,
         cycle list name=colorbrewer-RYB,
-        legend columns=-1,
-        legend style={draw=none, /tikz/every even column/.append style={column sep=5pt}},
-        legend image code/.code={%
-             \draw[#1] (0cm,-0.1cm) rectangle (0.3cm,0.1cm);
-        }
+        bar width=20pt,
+        ymajorgrids,
+        %legend columns=-1,
+        %legend style={draw=none, /tikz/every even column/.append style={column sep=15pt}},
+        %legend image code/.code={%
+        %     \draw[#1] (0cm,-0.1cm) rectangle (0.3cm,0.1cm);
+        %}
 ] 
 
 
-\pgfplotsinvokeforeach  {0,...,6}{
-  \addplot table [ x expr=\coordindex, select row=#1, y=Rapperswil] {\datatable};
+\pgfplotsinvokeforeach  {0,...,9}{
+  \addplot table [ x expr=\coordindex, select row=#1, y=Pw] {\occurrenceDataTable};
 }
 \end{axis}
 %\addplot[ybar, bar shift=0pt, fill=blue,
