@@ -10,6 +10,7 @@
 \usepackage{standalone}
 \usepackage{tikz}
 \usepackage{pgfplots,pgfplotstable}
+\usepackage{scalefnt}
 \usetikzlibrary{positioning}
 \usetikzlibrary{pgfplots.groupplots}
 
@@ -78,28 +79,28 @@ The \ac{tpr} value obtained for the intensity case is $16.6\pm27.5\%$, whereas f
 
 \begin{columns} 
 
-\column{0.35} \block{}{
+\column{0.34} \block{}{
 \begin{tikzfigure}[Distribution of the \acs{sift} descriptors for some classes in the \ac{gt}.]
 \input{./figures/lowLevelModelProbability/lowLevelModelProbability.tex}
   \label{fig:model}
 \end{tikzfigure}
 }
 
-\column{0.15} \block{}{
+\column{0.14} \block{}{
 \begin{tikzfigure}[Data prior knowlage.] %Class tiussue and feature priors.]
   \input{./figures/lowLevelPrior/lowLevelPrior.tex}
   \label{fig:prior}
 \end{tikzfigure}
 } 
 
-\column{0.15} \block{}{
+\column{0.17} \block{}{
 \begin{tikzfigure}[ Qualitative evaluation of the \ac{map} labeling of the feature space.]
 \input{./figures/lowLevelMAP/lowLevelMAP.tex}
   \label{fig:MAP}
 \end{tikzfigure}
 }
 
-\column{0.40} \block{}{
+\column{0.35} \block{}{
 \begin{tikzfigure}[some caption]
 \input{./figures/lowLevelConfMatrix/lowLevelConfusionMatrix.tex}
   \label{fig:llConfMatrix}
