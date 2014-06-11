@@ -30,22 +30,19 @@ Orange      1589          4992  11786
 Green       2122        11154   28747
 }\datatable
 
-\definecolor{RYB1}{RGB}{141, 211, 199}
-\definecolor{RYB2}{RGB}{255, 255, 179}
-\definecolor{RYB3}{RGB}{190, 186, 218}
-\definecolor{RYB4}{RGB}{251, 128, 114}
-\definecolor{RYB5}{RGB}{128, 177, 211}
-\definecolor{RYB6}{RGB}{253, 180, 98}
-\definecolor{RYB7}{RGB}{179, 222, 105}
+\input{../../defineBreastGTlabelColors.tex}
 
 \pgfplotscreateplotcyclelist{colorbrewer-RYB}{
-{RYB1!50!black,fill=RYB1},
-{RYB2!50!black,fill=RYB2},
-{RYB3!50!black,fill=RYB3},
-{RYB4!50!black,fill=RYB4},
-{RYB5!50!black,fill=RYB5},
-{RYB6!50!black,fill=RYB6},
-{RYB7!50!black,fill=RYB7},
+{bgColor!50!black,fill=bgColor},
+{lungColor!50!black,fill=lungColor},
+{chestWallColor!50!black,fill=chestWallColor},
+{ribColor!50!black,fill=ribColor},
+{pectoralColor!50!black,fill=pectoralColor},
+{fibroGlandColor!50!black,fill=fibroGlandColor},
+{fatColor!50!black,fill=fatColor},
+{skinColor!50!black,fill=skinColor},
+{lesionColor!50!black,fill=lesionColor},
+{boundaryColor!50!black,fill=boundaryColor},
 }
 
 \pgfplotsset{
