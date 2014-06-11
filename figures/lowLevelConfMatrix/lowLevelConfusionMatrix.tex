@@ -139,7 +139,10 @@
 			 ]
 			\addplot [gtLabelsPlotStyle,point meta=x] {0};   	
 \end{axis}
-
+\node at (siftConfMatrix.south) 
+      [ anchor=north,
+        yshift=-15pt,
+      ]{SIFT};
 \end{tikzpicture}
 %intensityMean	intensityStd
 %
@@ -147,7 +150,7 @@
 \begin{axis}
   [ confMatrix,
     %colorbar,colorbar to name={storedcolorbar},
-    name=siftConfMatrix,
+    name=intensityConfMatrix,
     %title=SIFT,
   ]
   \addplot graphics [xmin=0.5,xmax=10.5,ymin=0.5,ymax=10.5] 
@@ -200,6 +203,9 @@
 			 ]
 			\addplot [gtLabelsPlotStyle,point meta=x] {0};   	
 \end{axis}
-
+\node at (intensityConfMatrix.south) 
+      [ anchor=north,
+        yshift=-10pt,
+      ]{Intensity};
 \end{tikzpicture}
 \end{document}
