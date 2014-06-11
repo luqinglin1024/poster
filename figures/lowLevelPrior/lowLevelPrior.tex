@@ -4,7 +4,11 @@
 \pgfplotsset{compat=1.4}
 \usetikzlibrary{pgfplots.groupplots}
 
-\graphicspath{{../paperFigures/}}
+%\graphicspath{{../paperFigures/}}
+\input{../../defineBreastGTlabelColors.tex}
+
+\begin{document}
+
 \pgfplotstableread[col sep=comma]{
 Class, Occurrence, Pw
 %-------------------------------------
@@ -19,8 +23,6 @@ Skin,   17732, 	0.007
 Lsion,  163848,	0.065
 Bound,  81082, 	0.032
 }\occurrenceDataTable
-
-\input{../../defineBreastGTlabelColors.tex}
 
 \pgfplotscreateplotcyclelist{colorbrewer-RYB}{
 {bgColor!50!black,fill=bgColor},
@@ -42,8 +44,6 @@ Bound,  81082, 	0.032
 }
 
 \newcommand\mySize{6cm} 
-
-\begin{document}
 
 \begin{tikzpicture}
 \begin{axis}[ 
