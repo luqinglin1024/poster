@@ -1,90 +1,128 @@
 \documentclass[border=2pt]{standalone}
 \usepackage{tikz}
 \usepackage{pgfplots}
+\usepackage{scalefnt}
 
 \input{../../defineBreastGTlabelColors.tex}
 \begin{document}
+\makeatletter
+  \newcommand\tinyv{\@setfontsize\tinyv{7pt}{6}}
+\makeatother
 
-\newcommand\confMatrixSize{10cm}
+\newcommand\confMatrixSize{9cm}
 \newcommand\gtLabelDistance{0.3cm}
 
 \pgfplotsset{
-	myStyleCommon/.append style={	width=\confMatrixSize,height=\confMatrixSize,
-									scale only axis,
-									xlabel={Estimated Class},
-								    ylabel={Actual Class},
-								    yticklabels={},
-								    xticklabels={},
-									xticklabel pos=right,
-									xlabel near ticks,
-									xtick={1.5,2.5,...,9.5},
-									ytick={1.5,2.5,...,9.5},
-									grid,
-      }
-}
+	myStyleCommon/.append style={	width=\confMatrixSize,
+                                height=\confMatrixSize,
+                                scale only axis,
+                                xlabel={\small Estimated Class},
+                                ylabel={\small Actual Class},
+                                yticklabels={},
+                                xticklabels={},
+                                xticklabel pos=right,
+                                xlabel near ticks,
+                                xtick={1.5,2.5,...,9.5},
+                                ytick={1.5,2.5,...,9.5},
+                                grid,
+                              } }
 
 \pgfplotsset{
 	confMatrix/.append	style={	myStyleCommon,
-								axis on top,
-								colormap/jet,
-								point meta min=0,
-								point meta max=1,
-								xmin=0.5,
-								xmax=10.5,
-								y dir=reverse,
-								ymin=0.5,
-								ymax=10.5,
-							  }
-}
+                              axis on top,
+                              colormap/jet,
+                              point meta min=0,
+                              point meta max=1,
+                              xmin=0.5,
+                              xmax=10.5,
+                              y dir=reverse,
+                              ymin=0.5,
+                              ymax=10.5,
+							              } }
+
 \pgfplotsset{							  
-	gtLabelsAxis/.append style={myStyleCommon,
-								axis lines=none,
-								colormap={labelsGT}{color(0cm)=(bgColor);
-					 								color(1cm)=(lungColor);	
-					 								color(2cm)=(chestWallColor);
-										 			color(3cm)=(ribColor);
-										 			color(4cm)=(pectoralColor);
-										 			color(5cm)=(fibroGlandColor); 
-										 			color(6cm)=(fatColor); 
-					 								color(7cm)=(skinColor);    
-								 					color(8cm)=(lesionColor);
-							 						color(9cm)=(boundaryColor); 
-					 								color(10cm)=(unkTissueColor); 
-					 								},
-							    point meta min=0,
-							    point meta max=10,
-							    xmin=-0.5,xmax=9.5,
-							    height=0cm,
-							  }				  
-}
-\tikzstyle{gtLabelsPlotStyle}=[scatter,only marks,mark=square*,mark size=5pt,domain=0:9,samples at={0,...,9}]
-\tikzstyle{stdDrawingStyle} = [scatter, only marks, mark size=4pt]
+	gtLabelsAxis/.append style= { myStyleCommon,
+                                axis lines=none,
+                                colormap={labelsGT}{color(0cm)=(bgColor);
+                                          color(1cm)=(lungColor);	
+                                          color(2cm)=(chestWallColor);
+                                          color(3cm)=(ribColor);
+                                          color(4cm)=(pectoralColor);
+                                          color(5cm)=(fibroGlandColor); 
+                                          color(6cm)=(fatColor); 
+                                          color(7cm)=(skinColor);    
+                                          color(8cm)=(lesionColor);
+                                          color(9cm)=(boundaryColor); 
+                                          color(10cm)=(unkTissueColor); 
+                                          },
+                                  point meta min=0,
+                                  point meta max=10,
+                                  xmin=-0.5,xmax=9.5,
+                                  height=0cm,
+							                } }
+
+\tikzstyle{gtLabelsPlotStyle}= [scatter,
+                                only marks,
+                                mark=square*,
+                                mark size=5pt,
+                                domain=0:9,
+                                samples at={0,...,9},
+                               ]
+
+\tikzstyle{stdDrawingStyle} = [scatter, only marks, no marks,]
+\tikzstyle{meanValueStyle}  = [ font=\tinyv,
+                                fill=white,
+                                inner sep = 2pt,
+                                fill opacity=0.5,
+                                text opacity=1,
+                                %anchor=\coordindex,
+                              ]
+\tikzstyle{stdValuesStyle}  = [ meanValueStyle,
+                                anchor=north,
+                              ]
+ 
 
 \begin{tikzpicture}
-\begin{axis}[confMatrix,
-%             colorbar,colorbar to name={storedcolorbar},
-             name=siftConfMatrix,
-%             title=SIFT,
-             ]
-            \addplot graphics [xmin=0.5,xmax=10.5,ymin=0.5,ymax=10.5] {/home/sik/Work/escola/recerca/iwdm2014/poster/figures/lowLevelConfMatrix/LowLevelSIFTConfusionMatrixMean.png};
+\begin{axis}
+  [ confMatrix,
+    %colorbar,colorbar to name={storedcolorbar},
+    name=siftConfMatrix,
+    %title=SIFT,
+  ]
+  \addplot graphics [xmin=0.5,xmax=10.5,ymin=0.5,ymax=10.5] 
+  {/home/sik/Work/escola/recerca/iwdm2014/poster/figures/lowLevelConfMatrix/LowLevelSIFTConfusionMatrixMean.png};
 
-			\addplot[stdDrawingStyle,
-					 % we use ’point meta’ as color data...
-					point meta=\thisrow{siftStd},
-					% ... therefore, we can’t use it as argument for nodes near coords ..
-					% ... look how to print the numbers at pgfplotstable.pdf manual
-			        nodes near coords*={\tiny $
-				        				\pgfmathprintnumber[fixed,precision=0]{\meanVal}
-                        \hspace{-0.3em}\pm\hspace{-0.3em}
-				        				\pgfmathprintnumber[fixed,precision=1]{\stdVal}
-				        				$},
-			        % ... which requires to define a visualization dependency:
-           			visualization depends on={100*\thisrow{siftMean} \as \meanVal},
-           			visualization depends on={100*\thisrow{siftStd} \as \stdVal},
-					]
-					table[	y=actualClass,
-                  x=estimatedClass,
-                 ]{/home/sik/Work/escola/recerca/iwdm2014/poster/figures/lowLevelConfMatrix/lowLevelFeaturesConfusion.dat};
+  \addplot
+    [ stdDrawingStyle,
+      % we use ’point meta’ as color data...
+      point meta=\thisrow{siftStd},
+      % ... therefore, we can’t use it as argument for nodes near coords ..
+      % ... look how to print the numbers at pgfplotstable.pdf manual
+      nodes near coords*=
+        {$
+        \pgfmathprintnumber[fixed,precision=0]{\meanVal}\%
+        $},
+      % ... which requires to define a visualization dependency:
+      visualization depends on={100*\thisrow{siftMean} \as \meanVal},
+      % Add the node visual cues
+      every node near coord/.append style= {meanValueStyle },
+    ]
+  table[ y=actualClass, x=estimatedClass ]
+  {/home/sik/Work/escola/recerca/iwdm2014/poster/figures/lowLevelConfMatrix/lowLevelFeaturesConfusion.dat};
+
+  \addplot % Like the previous plot, but this time with less unncecessary stuff.
+    [ stdDrawingStyle,
+      nodes near coords*=
+        {$
+        \pm\hspace{-0.1em}
+        \pgfmathprintnumber[fixed,precision=1]{\stdVal}
+        $},
+      visualization depends on={100*\thisrow{siftStd} \as \stdVal},
+      every node near coord/.append style= {stdValuesStyle},
+    ]
+  table[ y=actualClass, x=estimatedClass ]
+  {/home/sik/Work/escola/recerca/iwdm2014/poster/figures/lowLevelConfMatrix/lowLevelFeaturesConfusion.dat};
+
 \end{axis}
 
 \begin{axis}[gtLabelsAxis,
@@ -106,30 +144,46 @@
 %intensityMean	intensityStd
 %
 \begin{tikzpicture}
-\begin{axis}[confMatrix,
-             colorbar,%colorbar to name={storedcolorbar},
-             name=intensityConfMatrix,
-%             title=Intensity,
-             ]
-            \addplot graphics [xmin=0.5,xmax=10.5,ymin=0.5,ymax=10.5] {/home/sik/Work/escola/recerca/iwdm2014/poster/figures/lowLevelConfMatrix/LowLevelIntensityConfusionMatrixMean.png};
+\begin{axis}
+  [ confMatrix,
+    %colorbar,colorbar to name={storedcolorbar},
+    name=siftConfMatrix,
+    %title=SIFT,
+  ]
+  \addplot graphics [xmin=0.5,xmax=10.5,ymin=0.5,ymax=10.5] 
+  {/home/sik/Work/escola/recerca/iwdm2014/poster/figures/lowLevelConfMatrix/LowLevelIntensityConfusionMatrixMean.png};
 
-			\addplot[stdDrawingStyle,
-					 % we use ’point meta’ as color data...
-					point meta=\thisrow{intensityStd},
-					% ... therefore, we can’t use it as argument for nodes near coords ..
-					% ... look how to print the numbers at pgfplotstable.pdf manual
-			        nodes near coords*={\tiny $
-				        				\pgfmathprintnumber[fixed,precision=0]{\meanVal}
-                        \hspace{-0.3em}\pm\hspace{-0.3em}
-				        				\pgfmathprintnumber[fixed,precision=1]{\stdVal}
-				        				$},
-			        % ... which requires to define a visualization dependency:
-           			visualization depends on={100*\thisrow{intensityMean} \as \meanVal},
-           			visualization depends on={100*\thisrow{intensityStd} \as \stdVal},
-					]
-					table[	y=actualClass,
-                  x=estimatedClass,
-                 ]{/home/sik/Work/escola/recerca/iwdm2014/poster/figures/lowLevelConfMatrix/lowLevelFeaturesConfusion.dat};
+  \addplot
+    [ stdDrawingStyle,
+      % we use ’point meta’ as color data...
+      point meta=\thisrow{siftStd},
+      % ... therefore, we can’t use it as argument for nodes near coords ..
+      % ... look how to print the numbers at pgfplotstable.pdf manual
+      nodes near coords*=
+        {$
+        \pgfmathprintnumber[fixed,precision=0]{\meanVal}\%
+        $},
+      % ... which requires to define a visualization dependency:
+      visualization depends on={100*\thisrow{intensityMean} \as \meanVal},
+      % Add the node visual cues
+      every node near coord/.append style= {meanValueStyle },
+    ]
+  table[ y=actualClass, x=estimatedClass ]
+  {/home/sik/Work/escola/recerca/iwdm2014/poster/figures/lowLevelConfMatrix/lowLevelFeaturesConfusion.dat};
+
+  \addplot % Like the previous plot, but this time with less unncecessary stuff.
+    [ stdDrawingStyle,
+      nodes near coords*=
+        {$
+        \pm\hspace{-0.1em}
+        \pgfmathprintnumber[fixed,precision=1]{\stdVal}
+        $},
+      visualization depends on={100*\thisrow{intensityStd} \as \stdVal},
+      every node near coord/.append style= {stdValuesStyle},
+    ]
+  table[ y=actualClass, x=estimatedClass ]
+  {/home/sik/Work/escola/recerca/iwdm2014/poster/figures/lowLevelConfMatrix/lowLevelFeaturesConfusion.dat};
+
 \end{axis}
 
 \begin{axis}[gtLabelsAxis,
@@ -148,8 +202,4 @@
 \end{axis}
 
 \end{tikzpicture}
-%
-%\begin{tikzpicture}
-%\ref{storedcolorbar}
-%\end{tikzpicture}
 \end{document}
