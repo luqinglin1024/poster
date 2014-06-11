@@ -4,6 +4,21 @@
 \pgfplotsset{compat=1.4}
 \usetikzlibrary{pgfplots.groupplots}
 
+\pgfplotstableread[col sep=comma]{
+Class, Occurrence, Pw
+%-------------------------------------
+Bg,     518738,	0.207
+Lungs,  447153,	0.178
+CWall,  134165,	0.054
+Ribs,   22541, 	0.009
+Pect,	  182468,	0.073
+FGlan,  525238,	0.210
+Fat,    413118,	0.165
+Skin,   17732, 	0.007
+Lsion,  163848,	0.065
+Bound,  81082, 	0.032
+}\occurrenceDataTable
+
 \pgfplotstableread{
 Criterion   Rapperswil  Palermo Jeddah
 Turquoise       3620        15749       42754
