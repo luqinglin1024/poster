@@ -2,7 +2,9 @@
 \usepackage{tikz}
 \usepackage{pgfplots,pgfplotstable}
 \pgfplotsset{compat=1.4}
+\usetikzlibrary{pgfplots.groupplots}
 
+\graphicspath{{../paperFigures/}}
 \pgfplotstableread[col sep=comma]{
 Class, Occurrence, Pw
 %-------------------------------------
@@ -45,19 +47,19 @@ Bound,  81082, 	0.032
 
 \begin{tikzpicture}
 \begin{axis}[ 
-        ybar=0pt,
-        /pgf/bar shift=0pt,scale only axis,
-        width=\mySize,
-        ymin=0,
-        xtick=\empty,
-        tickpos=left,
-        scaled y ticks=base 10:2,
-        cycle list name=colorbrewer-RYB,
-        bar width=20pt,
-        ymajorgrids,
-        title=$P(\omega)$,
-        name=pwAxis,
-] 
+              ybar=0pt,
+              /pgf/bar shift=0pt,scale only axis,
+              width=\mySize,
+              ymin=0,
+              xtick=\empty,
+              tickpos=left,
+              scaled y ticks=base 10:2,
+              cycle list name=colorbrewer-RYB,
+              bar width=14pt,
+              ymajorgrids,
+              title=$P(\omega)$,
+              name=pwAxis,
+            ] 
 
 
 \pgfplotsinvokeforeach  {0,...,9}{
@@ -65,6 +67,12 @@ Bound,  81082, 	0.032
 }
 \end{axis}
 
-\node[inner sep=0, below=of pwAxis](occurrenceMap){\includegraphics[height=\mySize]{siftOccurrences2}};
+\node at (pwAxis.south) 
+      [ anchor=north,
+        inner sep=0,
+        yshift=-10pt,
+%        draw,
+        label=below:$P(\bar{x})$,
+      ]{\includegraphics[height=\mySize]{siftOccurrences2}};
 \end{tikzpicture}
 \end{document}
