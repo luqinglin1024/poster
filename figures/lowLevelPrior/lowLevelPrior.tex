@@ -1,7 +1,7 @@
 \documentclass[border=2pt]{standalone}
 \usepackage{tikz}
-
-
+\usepackage{pgfplots,pgfplotstable}
+\pgfplotsset{compat=1.8}
 \input{../../defineBreastGTlabelColors.tex}
 
 \begin{document}
@@ -24,7 +24,7 @@ Bound,  81082, 	0.032
 
 \newcommand\mySize{6cm} 
 
-\node[anchor=south west,inner sep=0](occurrenceMap) at (-8pt,0) {\includegraphics[height=\mySize]{siftOccurrences2}};
+%\node[anchor=south west,inner sep=0](occurrenceMap) at (-8pt,0) {\includegraphics[height=\mySize]{siftOccurrences2}};
 
 \tikzset{labelSt/.style=
 {anchor=north west,rectangle,
