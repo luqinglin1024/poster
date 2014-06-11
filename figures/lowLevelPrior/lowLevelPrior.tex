@@ -1,67 +1,92 @@
 \documentclass[border=2pt]{standalone}
 \usepackage{tikz}
 \usepackage{pgfplots,pgfplotstable}
-\pgfplotsset{compat=1.8}
-\input{../../defineBreastGTlabelColors.tex}
+\pgfplotsset{compat=1.4}
+\usetikzlibrary{pgfplots.groupplots}
+
+\pgfplotstableread{
+Criterion   Rapperswil  Palermo Jeddah
+Turquoise       3620        15749       42754
+Yellow      2739        15109       42240
+Purple      3710        16146       40533
+Red           714         9306      28919
+Blue        2997          6840  11614
+Orange      1589          4992  11786
+Green       2122        11154   28747
+}\datatable
+
+\definecolor{RYB1}{RGB}{141, 211, 199}
+\definecolor{RYB2}{RGB}{255, 255, 179}
+\definecolor{RYB3}{RGB}{190, 186, 218}
+\definecolor{RYB4}{RGB}{251, 128, 114}
+\definecolor{RYB5}{RGB}{128, 177, 211}
+\definecolor{RYB6}{RGB}{253, 180, 98}
+\definecolor{RYB7}{RGB}{179, 222, 105}
+
+\pgfplotscreateplotcyclelist{colorbrewer-RYB}{
+{RYB1!50!black,fill=RYB1},
+{RYB2!50!black,fill=RYB2},
+{RYB3!50!black,fill=RYB3},
+{RYB4!50!black,fill=RYB4},
+{RYB5!50!black,fill=RYB5},
+{RYB6!50!black,fill=RYB6},
+{RYB7!50!black,fill=RYB7},
+}
+
+\pgfplotsset{
+    select row/.style={
+        x filter/.code={\ifnum\coordindex=#1\else\def\pgfmathresult{}\fi}
+    }
+}
 
 \begin{document}
-\begin{tikzpicture}
 
-\pgfplotstableread[col sep=comma]{
-Class, Occurrence, Pw
-%-------------------------------------
-Bg,     518738,	0.207
-Lungs,  447153,	0.178
-CWall,  134165,	0.054
-Ribs,   22541, 	0.009
-Pect,	  182468,	0.073
-FGlan,  525238,	0.210
-Fat,    413118,	0.165
-Skin,   17732, 	0.007
-Lsion,  163848,	0.065
-Bound,  81082, 	0.032
-}\occurrenceDataTable
-
-\newcommand\mySize{6cm} 
-
-%\node[anchor=south west,inner sep=0](occurrenceMap) at (-8pt,0) {\includegraphics[height=\mySize]{siftOccurrences2}};
-
-\tikzset{labelSt/.style=
-{anchor=north west,rectangle,
-node distance=1.96pt,
-scale=.6,
-minimum width=1pt,minimum height=1pt,
-}}
 
 \begin{tikzpicture}
-\begin{axis}[
-  ybar, 
-  %bar width=8pt,ymin=0,
-  %xmin=0.5,xmax=5.5, xtick=data,
-  %xticklabels from table={\mytable}{paradigm},
-  %xticklabel style={rotate=45,anchor=north east,inner sep=0mm},
-  %ylabel={\Large Time (s)}, ylabel near ticks]
-  \addplot table [x expr=\coordindex+1,y=Pw] {\occurrenceDataTable};
-  %\addlegendentry{Python 2.7};
-  %\addplot table [x expr=\coordindex+1,y=time3_2] {\mytable};
-  %\addlegendentry{Python 3.2};
-\end{axis}
-\end{tikzpicture}
+\begin{groupplot}
+    [
+        group style=
+            {
+            columns=3,
+            xlabels at=edge bottom,
+            ylabels at=edge left,
+            horizontal sep=0.05\textwidth, group name=plots
+            },
+        ybar=0pt,
+        /pgf/bar shift=0pt,scale only axis,
+        width=0.74\textwidth/3,
+        yticklabel style={text width=0.035\textwidth, align=right, inner xsep=0pt, xshift=-0.005\textwidth},
+        ylabel=kWh, ylabel style={text height=0.02\textwidth,inner ysep=0pt},
+        enlarge x limits=0.15,
+        ymin=0,
+        xtick=\empty,
+        tickpos=left,
+        scaled y ticks=base 10:-3,
+        cycle list name=colorbrewer-RYB,
+        legend columns=-1,
+        legend style={draw=none, /tikz/every even column/.append style={column sep=5pt}},
+        legend image code/.code={%
+             \draw[#1] (0cm,-0.1cm) rectangle (0.3cm,0.1cm);
+        }
+    ]
 
+\nextgroupplot[xlabel=Rapperswil, legend to name=grouplegend,]
+\pgfplotsinvokeforeach  {0,...,6}{
+    \addplot table [ x expr=\coordindex, select row=#1, y=Rapperswil] {\datatable};
+    \addlegendentry {\pgfplotstablegetelem{#1}{Criterion}\of\datatable \pgfplotsretval}
+}
 
+\nextgroupplot[xlabel=Palermo]
+\pgfplotsinvokeforeach  {0,...,6}{
+    \addplot table [x expr=\coordindex, select row=#1, y=Palermo] {\datatable};
+}
 
+\nextgroupplot[xlabel=Jeddah]
+\pgfplotsinvokeforeach  {0,...,6}{
+    \addplot table [x expr=\coordindex, select row=#1, y=Jeddah] {\datatable};
+}
 
-%\node[anchor=south west,inner sep=0, above=of occurrenceMap](imgNode) {\includegraphics[trim = 5 5 18 0, clip,width=\mySize]{classPrior}};
-%
-%\draw[] (imgNode.south west) +(14pt,3.5pt) node[labelSt, draw=bgColor, fill=bgColor] (bgName) {} ;
-%\draw[] node[labelSt,draw=lungColor, fill=lungColor,right=of bgName] (lungName) {};
-%\draw[] node[labelSt, draw=chestWallColor,right=of lungName, fill=chestWallColor] (cwName) {} ;
-%\draw[] node[labelSt, draw=ribColor, fill=ribColor,right=of cwName] (ribName) {} ;
-%\draw[] node[labelSt, draw=pectoralColor, fill=pectoralColor,right=of ribName] (pectoralName) {} ;
-%\draw[] node[labelSt, draw=fibroGlandColor, fill=fibroGlandColor,right=of pectoralName] (fibroGlandName) {} ;
-%\draw[] node[labelSt, draw=fatColor, fill=fatColor,right=of fibroGlandName] (fatName) {} ;
-%\draw[] node[labelSt, draw=skinColor, fill=skinColor,right=of fatName] (skinName) {} ;
-%\draw[] node[labelSt, draw=lesionColor, fill=lesionColor,right=of skinName] (lesionName) {} ;
-%\draw[] node[labelSt, draw=boundaryColor, fill=boundaryColor,right=of lesionName] (boundaryName) {} ;
+\end{groupplot}
+\node at (plots c2r1.south) [inner sep=0pt,anchor=north, yshift=-5ex] {\ref{grouplegend}};
 \end{tikzpicture}
 \end{document}
