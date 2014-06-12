@@ -43,20 +43,18 @@
 \pgfplotsset{							  
 	gtLabelsAxis/.append style= { myStyleCommon,
                                 axis lines=none,
-                                colormap={labelsGT}{color(0cm)=(bgColor);
-                                          color(1cm)=(lungColor);	
-                                          color(2cm)=(chestWallColor);
-                                          color(3cm)=(ribColor);
-                                          color(4cm)=(pectoralColor);
-                                          color(5cm)=(fibroGlandColor); 
-                                          color(6cm)=(fatColor); 
-                                          color(7cm)=(skinColor);    
-                                          color(8cm)=(lesionColor);
-                                          color(9cm)=(boundaryColor); 
-                                          color(10cm)=(unkTissueColor); 
+                                colormap={labelsGT}{
+                                          color(0cm)=(lungColor);	
+                                          color(1cm)=(chestWallColor);
+                                          color(2cm)=(ribColor);
+                                          color(3cm)=(pectoralColor);
+                                          color(4cm)=(fibroGlandColor); 
+                                          color(5cm)=(fatColor); 
+                                          color(6cm)=(skinColor);    
+                                          color(7cm)=(lesionColor);
                                           },
-                                  point meta min=1,
-                                  point meta max=8,
+                                  point meta min=0,
+                                  point meta max=7,
                                   xmin=-0.5,xmax=7.5,
                                   height=0cm,
 							                } }
@@ -65,8 +63,8 @@
                                 only marks,
                                 mark=square*,
                                 mark size=5pt,
-                                domain=1:8,
-                                samples at={1,...,8},
+                                domain=0:7,
+                                samples at={0,...,7},
                                ]
 
 \tikzstyle{stdDrawingStyle} = [scatter, only marks, no marks,]
