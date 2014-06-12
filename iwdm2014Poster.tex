@@ -39,7 +39,6 @@
 \block{Abstract}{
 Texture is a powerful cue for describing structures that show a high degree of similarity in their image intensity patterns. 
 This paper describes the use of \acf{sift}, both as low-level and high-level descriptors, applied to differentiate the tissues present in breast US images. 
-
 For such a task, a subset of 16 images has been randomly selected from a larger dataset of 700 \ac{us} images acquired at the \emph{UDIAT Diagnostic Centre of Parc Taul\'{i}} in Sabadell (Catalunya), between 2010 and 2012.
 This subset has been complemented with multi-label \ac{gt}, as illustrated in figure~\ref{fig:dataExample}.
 
@@ -60,21 +59,30 @@ This subset has been complemented with multi-label \ac{gt}, as illustrated in fi
 %\end{keywords}
 
 \block{\ac{sift} as a low-level descriptor, tested using \ac{map}}{
-  In this experiment, it has been analyzed how separable are the tissue classes present in breast ultrasound images, when using low-level descriptors based on \ac{sift} to encode \ac{us} texture.
-  Here a Bayesian framework has been assumed to perform the tissue discrimination and its results are presented both qualitatively (see fig.~\ref{fig:model}-\ref{fig:MAP}) and quantitatively (see fig.~\ref{fig:llConfMatrix}).
-  
-  All the pixel positions of all the images are used as a key-point for extracting a \ac{sift} descriptor and mapped in the $128D$ feature space of \ac{sift}.
-  This \ac{sift} space is then projected into a $2D$ space to visually assess how the tissue classes are distributed in such space.
-  From this projected space, models (see fig.~\ref{fig:model}) and priors (see fig.~\ref{fig:prior}) are extracted to infer the \ac{map} probability.
-  Figure~\ref{fig:MAP} shows this \ac{map} probability illustrating how the tissue classes are separated based on the observed data.
+  \begin{itemize}
 
-In order to generate cross-validated quantitative results, the descriptors have been randomly sampled as follows: ($10.000\text{ samples} \times 10 \text{ classes}) \times 5 \text{ folds}$.
- At each round 4 folds have been used for training the %\ac{ml} term in eq.\,\ref{eq:bayes} ($P(\bar{x}_a|\omega)$) 
- models 
- and the remaining fold has been used for testing.
- Figure~\ref{fig:llConfMatrix} shows the corss-validated confusion matrix resulting from classifying breast tissues based on a Bayesian framework using either low-level \ac{sift} texture descriptors or intensity.
-The trance of the confusion matrix corresponds to the sensitivity which provides a general sense of performance across all the labels.
-The \ac{tpr} value obtained for the intensity case is $16.6\pm27.5\%$, whereas for the \ac{sift} case is $18.8\pm17.2\%$ which show that both feature spaces produce similar results.
+    \item Goal: Analyze how separable are the tissue classes present in breast \ac{us} images
+      \begin{itemize}
+        \item Bayesian framework for tissue discrimination (see eq.\,\ref{eq:bayes}).
+        \item low-level descriptors based on \ac{sift}
+      \end{itemize}
+
+    \item Feature Description.
+      \begin{itemize}
+        \item Extract \ac{sift} descriptors at all pixel positions.
+        \item Project the $128D$ \ac{sift} to $2D$ using \ac{pca}.
+      \end{itemize}
+
+    \item Qualitative analysis can be found in fig.\,\ref{fig:model}-\ref{fig:MAP}.
+    \item Quantitative analysis can be found in fig.\,\ref{fig:llConfMatrix},
+          where a comparison with intensity feature can be found. The overall sensitivity for the intensity case is $16.6\pm27.5\%$, whereas for the \ac{sift} case is $18.8\pm17.2\%$ which show that both feature spaces produce similar results.
+  
+  \end{itemize}
+  
+  \begin{equation}
+    P(\omega|\bar{x}) = \frac{P(\bar{x}|\omega)\cdot P(\omega)}{P(\bar{x})}
+    \label{eq:bayes}
+  \end{equation}
 }
 
 \begin{columns} 
@@ -112,18 +120,32 @@ The \ac{tpr} value obtained for the intensity case is $16.6\pm27.5\%$, whereas f
 
 \block{\ac{sift} as a high-level descriptor using \acf{bof}, tested using \ac{rbf}-\ac{svm} classifier}{
   Texture is an area property related to spatial repetition of structures, statistical similarities, or both.
-  In this experiment superpixels are extracted using \ac{qs} methodology to generate this areas. Some of this superpixels are illustrated in figure~\ref{fig:bof}.
-  For each superpixel, a high-level texture descriptor is build as a \ac{bof} of \ac{sift} descriptors. 
-  Initially the \ac{sift} space is clustered to generate a codebook. Here k-means procedure with $k=36$ is used to generate these codebooks. 
-  Figure~\ref{fig:bof} shows an arbitrary coloring of each cluster to illustrate how the codebook produce a hard quantification of the \ac{sift} space.
-  Finally the \ac{bof} descriptor for a superpixel corresponds to the occurrence study of the codebook using the \ac{sift} descriptors belonging to this particular superpixel (see 1-8 in fig\,\ref{fig:bof}). 
 
-  In order to produce quantitative results, dataset of superpixels is generated based on the images and the multi-label \ac{gt} available.
-  For a superpixel to be eligible, an area larger than $75\%$ need to belong to a single \ac{gt} label. The resulting dataset contains 20 folds of 8 superpixels (one per class). 
+  \begin{itemize}
 
-  The experiment has been repeated for different coodebooks to take into account the variability of the coodebook within the results. 
-  Figure~\ref{fig:hlConfMatrix} compares the results of using \ac{bof} based on \ac{sift} or intensity for encoding \ac{us} texture. 
-  The sensitivity achieved is $29\pm3.6\%$ for the intenisty and $33.5\pm2.3\%$ for \ac{sift}.
+    \item Goal: Analyze how separable are the tissue classes present in breast \ac{us} images
+      \begin{itemize}
+        \item Classification framework for tissue discrimination (\ac{rbf}-\ac{svm}).
+        \item High-level descriptors based on \ac{bof}-\ac{sift}.
+      \end{itemize}
+
+    \item Feature Description (see fig.\,\ref{fig:bof}).
+      \begin{itemize}
+        \item Generate a codebook of the features (k-means, $k=36$).
+        \item Extract superpixels (\ac{qs}).
+        \item Occurrence study to describe each superpixel.
+      \end{itemize}
+
+    \item Quantitative analysis can be found in fig.\,\ref{fig:hlConfMatrix},
+          The sensitivity achieved is $29\pm3.6\%$ for the intenisty and $33.5\pm2.3\%$ for \ac{sift}.
+  \end{itemize}
+
+%  In order to produce quantitative results, dataset of superpixels is generated based on the images and the multi-label \ac{gt} available.
+%  For a superpixel to be eligible, an area larger than $75\%$ need to belong to a single \ac{gt} label. The resulting dataset contains 20 folds of 8 superpixels (one per class). 
+
+%  The experiment has been repeated for different coodebooks to take into account the variability of the coodebook within the results. 
+%  Figure~\ref{fig:hlConfMatrix} compares the results of using \ac{bof} based on \ac{sift} or intensity for encoding \ac{us} texture. 
+%  The sensitivity achieved is $29\pm3.6\%$ for the intenisty and $33.5\pm2.3\%$ for \ac{sift}.
 }
 
 \begin{columns}
