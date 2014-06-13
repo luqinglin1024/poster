@@ -1,0 +1,11 @@
+% include pgfplots and do a workaround to add the missing layers. This problem might be related to pgfplots and tikz versions as pointed out in: http://tex.stackexchange.com/questions/104010/why-does-loading-pgfplots-after-tikz-break-the-default-layers-in-a-tikzpicture
+
+\usepackage{pgfplots}
+
+% define layers
+    \pgfdeclarelayer{foreground}
+    \pgfdeclarelayer{background}
+    \pgfdeclarelayer{backgroundlayer} 
+    \pgfdeclarelayer{notelayer}
+% tell TikZ how to stack them (back to front)
+    \pgfsetlayers{background,backgroundlayer,main,notelayer,foreground}
