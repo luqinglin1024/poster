@@ -14,23 +14,14 @@
 \usepackage{standalone}
 \usepackage{scalefnt}
 \usepackage{url}
+\usepackage{pgfplots,pgfplotstable}
+\pgfplotsset{compat=1.8}
+
+\input{includePgfplotsWorkaround.tex}
 
 \definecolor{udgColor}{RGB}{82,119,213}
 
-
 \title{\acs{sift} texture description for understanding breast ultrasound images}
-%\author{Joan Massich\inst{1}\inst{2}\thanks{This work was partially supported by the Spanish Science and Innovation grant nb. TIN2012-37171-C02-01 and TTIN2012-37171-C02-02 and the Regional Council of Burgundy.} \and Fabrice Meriaudeau \inst{2} \and Melcior Sent{\'i}s\inst{3} \and Sergi Ganau\inst{3} \and Elsa~P{\'e}rez\inst{4} 
-%\and Domenec Puig\inst{5} \and Robert  Mart{\'i} \inst{1} \and  Arnau Oliver\inst{1}\and Joan Mart{\'i} \inst{1}}
-%\institute{Computer Vision and Robotics Group, University of Girona, Spain. \email{jmassich@atc.udg.edu} \and
-%Laboratoire Le2i-UMR CNRS, University of Burgundy,  Le Creusot, France.
-% \and Department of
-%Breast and Gynecological Radiology,  UDIAT-Diagnostic Center, Parc
-%Taul{\'i} Corporation, Sabadell, Spain.
-% \and 
-%Department of Radiology, Hospital Josep Trueta of Girona, Spain.
-%\and
-%Department of Computer Engineering and Mathematics, University Rovira i Virgili, Tarragona, Spain.}
-
 \author{Joan Massich, Fabrice Meriaudeau, Melcior Sent{\'i}s, Sergi Ganau, Elsa~P{\'e}rez, Domenec Puig, Robert  Mart{\'i}, Arnau Oliver and Joan Mart{\'i}}
 
 %\institute{contact author: sik@eia.udg.edu}
@@ -43,9 +34,10 @@
 
 \begin{document}\maketitle
 \input{acronyms.tex}
+\acresetall
 
 \graphicspath{{figures/paperFigures/}}
-\acresetall
+
 
 \block{Abstract}{
 Texture is a powerful cue for describing structures that show a high degree of similarity in their image intensity patterns. This paper describes the use of \acf{sift}, both as low-level and high-level descriptors, applied to differentiate the tissues present in breast US images. For the low-level texture descriptors case, \ac{sift} descriptors are extracted from a regular grid. The high-level texture descriptor is build as a \ac{bof} of \ac{sift} descriptors. 
@@ -81,9 +73,18 @@ Experimental results are provided showing the validity of the proposed approach 
 }
 
 
+
 \block{xxx}{
 \begin{tikzfigure}[ Qualitative evaluation of the \ac{map} labeling of the feature space.]
 \input{./figures/lowLevelMAP/lowLevelMAP.tex}
+\end{tikzfigure}
+}
+
+
+\block{xxx}{
+hello world !!
+\begin{tikzfigure}[some caption]
+\input{./figures/lowLevelConfMatrix/lowLevelConfusionMatrix.tex}
 \end{tikzfigure}
 }
 
