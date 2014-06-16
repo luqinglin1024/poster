@@ -1,4 +1,4 @@
-\documentclass[25pt, a0paper, portrait, margin=0mm, innermargin=15mm, blockverticalspace=15mm, colspace=15mm, subcolspace=8mm]{tikzposter}
+\documentclass[25pt, a0paper, portrait, margin=0mm, innermargin=15mm, blockverticalspace=15mm, colspace=15mm, subcolspace=8mm,draft]{tikzposter}
 
 \usepackage{xcolor}
 \usepackage{filecontents}% http://ctan.org/pkg/filecontents
@@ -9,75 +9,27 @@
 
 \setlength{\columnsep}{2cm}
 
-\begin{filecontents*}{myDummyPictureCode.tex}
-  \begin{tikzfigure}[Some nice caption for the figure]
-    \centering
-    \begin{tikzpicture}
-      \draw [color=red] (0,0) rectangle (20,10) node [midway] {\huge myFigure};
-    \end{tikzpicture}
-  \end{tikzfigure}
-\end{filecontents*}
-
-\title{ Text and figure Block using MINIPAGE }
+\title{\parbox{0.5\linewidth}{\centering My  really  really  really  really  really  really  really  really  long poster TITLE.}}
 \author{Name}
+\titlegraphic{
+%\input{myDummyPictureCode.tex} \hfill \input{myDummyPictureCode.tex}
+%\\
+%\input{myDummyPictureCode.tex} \hfill \input{myDummyPictureCode.tex}
+\includegraphics[width=10cm,height=5cm]{./myImage.jpg}
+ \hfill 
+\includegraphics[width=10cm,height=5cm]{./myImage.jpg}
+\\% \vspace{5pt} \\
+\includegraphics[width=10cm,height=5cm]{./myImage.jpg}
+ \hfill 
+\includegraphics[width=10cm,height=5cm]{./myImage.jpg}
+}
 
 \usetheme{Autumn}\usecolorstyle[colorPalette=BrownBlueOrange]{Germany}
 
 \begin{document}\maketitle
 
-% Text and figure Inside the Block using minipage
-\block{}{
-  \fbox{
-  \begin{minipage}[t]{0.7\linewidth}
-    \lipsum[1]
-  \end{minipage}%
-  }
-  %
-  \fbox{
-  \begin{minipage}[t]{0.3\linewidth}
-    \input{./myDummyPictureCode.tex}
-  \end{minipage} 
-  }
-}
-
-% Text and figure Inside the Block using minipage aligned using adjustbox
-\block{Text and figure Block using MINIPAGE}{
-  \fbox{
-  \begin{minipage}[t]{0.7\linewidth}
-    \lipsum[1]
-  \end{minipage}%
-  }
-  %
-  \fbox{
-  \begin{adjustbox}{valign=t}
-  \fbox{
-  \begin{minipage}[t]{0.3\linewidth}
-    \input{./myDummyPictureCode.tex}
-  \end{minipage} 
-  }
-  \end{adjustbox}
-  }
-}
-
-% playing with multicolumn text
-\block{Text and figure Block using MINIPAGE and MULTICOLS}{
-  \fbox{
-  \begin{minipage}[t]{0.7\linewidth}
-  \begin{multicols*}{2}
-    \lipsum[1]
-  \end{multicols*}
-  \end{minipage}%
-  }
-  %
-  \fbox{
-  \begin{adjustbox}{valign=t}
-  \fbox{
-  \begin{minipage}[t]{0.3\linewidth}
-    \input{./myDummyPictureCode.tex}
-  \end{minipage} 
-  }
-  \end{adjustbox}
-  }
+\block{My LIPSUM block}{
+  \lipsum[1]
 }
 
 \end{document}
