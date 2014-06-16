@@ -4,11 +4,11 @@
 \pgfplotsset{compat=1.8}
 \usetikzlibrary{positioning}
 
-%\graphicspath{{../paperFigures/}}
+\graphicspath{{../paperFigures/}}
 \input{../../defineBreastGTlabelColors.tex}
 
 \begin{document}
-
+\newcommand\mySize{12cm}
 % argument #1: any options
 \newenvironment{customlegend}[1][]{%
     \begingroup
@@ -32,6 +32,7 @@
 \tikzstyle{myLegendStyle} = [ align=left,
                               draw=none,
                               column sep=2ex,
+                              font=\tiny,
                             ]
 
 %\newcommand\addMyLegendArea[1][]
@@ -52,7 +53,7 @@
                       Boundary,                            
                     },
     anchor = north,
-    at = {(0,0)},
+    at = {(0,4)},
   ]
 
 %  \addMyLegendArea{red}
@@ -69,9 +70,9 @@
 
 \end{customlegend}
 
-\node[anchor=south west,inner sep=0] (imgNode) at (0,0) {\includegraphics[width=4cm]{pngImgs/gt/000002.png}};
+\node[anchor=south west,inner sep=0] (imgNode) at (-11.5,1.5) {\includegraphics[width=\mySize]{pngImgs/gt/000002.png}};
 
-\node[anchor=south east,inner sep=0] at (-8pt,0) {\includegraphics[width=4cm]{pngImgs/000002.png}};
+\node[anchor=south east,inner sep=0] at (-12,1.5) {\includegraphics[width=\mySize]{pngImgs/000002.png}};
 
 \end{tikzpicture}
 \end{document}
