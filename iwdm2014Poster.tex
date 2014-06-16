@@ -3,7 +3,7 @@
 \usepackage{amsmath}
 \usepackage{epsf,graphicx,subfig}
 \setcounter{tocdepth}{3}
-\usepackage{xcolor}
+\usepackage{xcolor}-.05\textwidth
 \usepackage{lineno}
 \usepackage[nolist]{acronym}
 \usepackage{amssymb,amsmath}
@@ -50,7 +50,7 @@ This subset has been complemented with multi-label \ac{gt}, as illustrated in fi
 }
   \column{0.4}
 \block{}{
-\begin{tikzfigure}[Dataset sample. From left to right: image sample, accompanying multi-label \ac{gt}, tissue label \ac{gt} color-coding.]
+\begin{tikzfigure}[Data sample: image, accompanying multi-label \ac{gt}, tissue label \ac{gt} color-coding.]
   \centering
   \input{./figures/gtExample/gtExample.tex}
   \label{fig:dataExample}
@@ -65,7 +65,7 @@ This subset has been complemented with multi-label \ac{gt}, as illustrated in fi
   \begin{multicols*}{3}
     \begin{itemize}
 
-      \item Analyze tissue classes separability.
+      \item Goal, analyze tissue classes separability based on:
         \begin{itemize}
           \item Bayesian framework for tissue discrimination (see eq.\,\ref{eq:bayes}).
           \item low-level descriptors based on \ac{sift}
@@ -105,7 +105,7 @@ This subset has been complemented with multi-label \ac{gt}, as illustrated in fi
 }
 
 \column{0.14} \block{}{
-\begin{tikzfigure}[Data prior knowlage.] %Class tiussue and feature priors.]
+\begin{tikzfigure}[Data prior knowledge.] %Class tiussue and feature priors.]
   \input{./figures/lowLevelPrior/lowLevelPrior.tex}
   \label{fig:prior}
 \end{tikzfigure}
@@ -134,7 +134,7 @@ This subset has been complemented with multi-label \ac{gt}, as illustrated in fi
 
   \begin{itemize}
 
-    \item Goal: Analyze how separable are the tissue classes present in breast \ac{us} images
+    \item Goal, analyze tissue classes separability based on:
       \begin{itemize}
         \item Classification framework for tissue discrimination (\ac{rbf}-\ac{svm}).
         \item High-level descriptors based on \ac{bof}-\ac{sift}.
@@ -148,7 +148,7 @@ This subset has been complemented with multi-label \ac{gt}, as illustrated in fi
       \end{itemize}
 
     \item Quantitative analysis can be found in fig.\,\ref{fig:hlConfMatrix},
-          The sensitivity achieved is $29\pm3.6\%$ for the intenisty and $33.5\pm2.3\%$ for \ac{sift}.
+          The sensitivity achieved is $29\pm3.6\%$ for the intensity and $33.5\pm2.3\%$ for \ac{sift}.
   \end{itemize}
 
 %  In order to produce quantitative results, dataset of superpixels is generated based on the images and the multi-label \ac{gt} available.
@@ -162,13 +162,15 @@ This subset has been complemented with multi-label \ac{gt}, as illustrated in fi
 
 \begin{columns}
 \column{0.60} \block{}{
-\begin{tikzfigure}[ \acs{sift}-\acs{bof} descriptors qualitative analysis. (Left) image example. (Right) Dictionary representation colored using the location of the keypoint location in fig.\,\ref{fig:siftMapping}a space. (1-8) Occurrence of the dictionary's key-points associated to each region highlighted in the original image.]
+\begin{tikzfigure}[ \acs{sift}-\acs{bof} descriptors qualitative analysis.
+ Image example; dictionary example; dictionary occurrence associated with the highlighted superpixels.]
 \input{./figures/backOfFeatures/backOfFeatures.tex} 
 \label{fig:bof}
 \end{tikzfigure}
 }
 \column{0.40} \block{}{
-\begin{tikzfigure}[some caption]
+\begin{tikzfigure}[Confusion matrix showing quantitative results obtained from ($1\text{ samples} \times 8 \text{ classes} \times 3 \text{ coodebooks}) \times 20 \text{ folds}$ cross-validation.
+  ]
 \input{./figures/highLevelConfMatrix/highLevelConfusionMatrix.tex}
 \label{fig:hlConfMatrix}
 \end{tikzfigure}
@@ -184,6 +186,6 @@ The fact that \ac{sift} and intensity descriptors produce similar results, encou
 
 }
 %\note[targetoffsetx=24cm, targetoffsety=-9cm,radius=8cm,width=.75\textwidth,innersep=.4cm]{You can...}
-\note[targetoffsetx=0cm,targetoffsety=-9cm,radius=8cm,width=.5\textwidth,innersep=.4cm]{This work was partially supported by the Spanish Science and Innovation grant nb.\,TIN2012-37171-C02-01 and TTIN2012-37171-C02-02, and the Regional Council of
+\note[targetoffsetx=-8cm,targetoffsety=-5cm,radius=8cm,width=.8\textwidth,innersep=.4cm]{\centering This work was partially supported by the Spanish Science and Innovation grant nb.\,TIN2012-37171-C02-01 and TTIN2012-37171-C02-02, and the Regional Council of
 Burgundy.}
 \end{document}
