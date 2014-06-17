@@ -20,6 +20,9 @@
 \usepackage{url}
 \pgfplotsset{compat=1.8}
 
+\usepackage{adjustbox}
+\usepackage{epstopdf}
+
 \input{includePgfplotsWorkaround.tex}
 
 
@@ -28,16 +31,13 @@
 \title{\acs{sift} texture description for understanding breast ultrasound images}
 \author{Joan Massich, Fabrice Meriaudeau, Melcior Sent{\'i}s, Sergi Ganau, Elsa~P{\'e}rez, Domenec Puig, Robert  Mart{\'i}, Arnau Oliver and Joan Mart{\'i}}
 \titlegraphic{
-%\input{myDummyPictureCode.tex} \hfill \input{myDummyPictureCode.tex}
-%\\
-%\input{myDummyPictureCode.tex} \hfill \input{myDummyPictureCode.tex}
-\includegraphics[width=10cm,height=5cm]{./myImage.jpg}
+\includegraphics[height=5cm]{figures/logos/udg.jpg}
  \hfill 
-\includegraphics[width=10cm,height=5cm]{./myImage.jpg}
+\includegraphics[height=5cm]{figures/logos/uB.pdf}
 \\% \vspace{5pt} \\
-\includegraphics[width=10cm,height=5cm]{./myImage.jpg}
+\includegraphics[height=5cm]{figures/logos/urv.pdf}
  \hfill 
-\includegraphics[width=10cm,height=5cm]{./myImage.jpg}
+\includegraphics[height=5cm]{figures/logos/ics.jpg}
 }
 
 
@@ -51,6 +51,7 @@
 {\huge \@author \par} \vspace*{1em} {\LARGE \@institute}
 }}
 \makeatother
+
 %\institute{contact author: sik@eia.udg.edu}
 \usetheme{Autumn}\usecolorstyle[colorPalette=BrownBlueOrange]{Germany}
 %\usetheme{Simple} \usecolorstyle[colorOne=udgColor]{Denmark} 
