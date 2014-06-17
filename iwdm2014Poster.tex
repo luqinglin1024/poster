@@ -2,6 +2,9 @@
 
 \usepackage{amsmath}
 \usepackage{epsf,graphicx,subfig}
+
+\usepackage{amsmath}
+\usepackage{epsf,graphicx,subfig}
 \setcounter{tocdepth}{3}
 \usepackage{xcolor}
 \usepackage{lineno}
@@ -19,11 +22,35 @@
 
 \input{includePgfplotsWorkaround.tex}
 
+
 \definecolor{udgColor}{RGB}{82,119,213}
 
 \title{\acs{sift} texture description for understanding breast ultrasound images}
 \author{Joan Massich, Fabrice Meriaudeau, Melcior Sent{\'i}s, Sergi Ganau, Elsa~P{\'e}rez, Domenec Puig, Robert  Mart{\'i}, Arnau Oliver and Joan Mart{\'i}}
+\titlegraphic{
+%\input{myDummyPictureCode.tex} \hfill \input{myDummyPictureCode.tex}
+%\\
+%\input{myDummyPictureCode.tex} \hfill \input{myDummyPictureCode.tex}
+\includegraphics[width=10cm,height=5cm]{./myImage.jpg}
+ \hfill 
+\includegraphics[width=10cm,height=5cm]{./myImage.jpg}
+\\% \vspace{5pt} \\
+\includegraphics[width=10cm,height=5cm]{./myImage.jpg}
+ \hfill 
+\includegraphics[width=10cm,height=5cm]{./myImage.jpg}
+}
 
+
+% Fix the logos positioning
+\makeatletter
+\def\TP@titlegraphictotitledistance{-9cm}   % -9 can be adjusted to one's need
+\settitle{ \centering \vbox{
+\@titlegraphic \\[\TP@titlegraphictotitledistance] \centering
+\color{titlefgcolor} {\bfseries \Huge \sc \@title \par}
+\vspace*{1em}
+{\huge \@author \par} \vspace*{1em} {\LARGE \@institute}
+}}
+\makeatother
 %\institute{contact author: sik@eia.udg.edu}
 \usetheme{Autumn}\usecolorstyle[colorPalette=BrownBlueOrange]{Germany}
 %\usetheme{Simple} \usecolorstyle[colorOne=udgColor]{Denmark} 
@@ -168,6 +195,7 @@ This subset has been complemented with multi-label \ac{gt}, as illustrated in fi
 \label{fig:bof}
 \end{tikzfigure}
 }
+
 \column{0.40} \block{}{
 \begin{tikzfigure}[Confusion matrix showing quantitative results obtained from ($1\text{ samples} \times 8 \text{ classes} \times 3 \text{ coodebooks}) \times 20 \text{ folds}$ cross-validation.
   ]
@@ -176,7 +204,6 @@ This subset has been complemented with multi-label \ac{gt}, as illustrated in fi
 \end{tikzfigure}
 } 
 \end{columns}
-
 
 %\block[titleoffsety=-1cm,bodyoffsety=-1cm]{Sample document}{This poster...}
 \block{Conclusion}{
