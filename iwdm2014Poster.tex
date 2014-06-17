@@ -26,6 +26,17 @@
 
 \usetheme{Autumn}\usecolorstyle[colorPalette=BrownBlueOrange]{Germany}
 
+% Fix the logos positioning
+\makeatletter
+\def\TP@titlegraphictotitledistance{-9cm}   % -9 can be adjusted to one's need
+\settitle{ \centering \vbox{
+\@titlegraphic \\[\TP@titlegraphictotitledistance] \centering
+\color{titlefgcolor} {\bfseries \Huge \sc \@title \par}
+\vspace*{1em}
+{\huge \@author \par} \vspace*{1em} {\LARGE \@institute}
+}}
+\makeatother
+
 \begin{document}\maketitle
 
 \block{My LIPSUM block}{
