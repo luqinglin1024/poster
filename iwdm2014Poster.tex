@@ -29,7 +29,22 @@
 \definecolor{udgColor}{RGB}{82,119,213}
 
 \title{\parbox{0.8\linewidth}{\centering \acs{sift} texture description for understanding breast ultrasound images}}
-\author{\parbox{0.8\linewidth}{\centering Joan Massich, Fabrice Meriaudeau, Melcior Sent{\'i}s, Sergi Ganau, Elsa~P{\'e}rez, Domenec Puig, Robert  Mart{\'i}, Arnau Oliver and Joan Mart{\'i}}}
+\author{\parbox{0.8\linewidth}{\centering Joan Massich\textsuperscript{1,2},
+                                          Fabrice Meriaudeau\textsuperscript{2}, 
+                                          Melcior Sent{\'i}s\textsuperscript{3},
+                                          Sergi Ganau\textsuperscript{3},
+                                          Elsa~P{\'e}rez\textsuperscript{4},
+                                          Domenec Puig\textsuperscript{5},
+                                          Robert  Mart{\'i}\textsuperscript{1},
+                                          Arnau Oliver\textsuperscript{1,2}
+                                          and Joan Mart{\'i}\textsuperscript{1}}}
+\institute{ 
+  \textsuperscript{1}Computer Vision and Robotics Group, University of Girona, Spain.
+  \textsuperscript{2}Laboratoire Le2i-UMR CNRS, University of Burgundy,  Le Creusot, France.
+  \textsuperscript{3}Department of Breast and Gynecological Radiology,  UDIAT-Diagnostic Center, Parc Taul{\'i} Corporation, Sabadell, Spain.
+  \textsuperscript{4}Department of Radiology, Hospital Josep Trueta of Girona, Spain.
+  \textsuperscript{5}Department of Computer Engineering and Mathematics, University Rovira i Virgili, Tarragona, Spain.
+}
 \titlegraphic{
 \includegraphics[width=5cm]{figures/logos/udg.png}
  \hfill 
@@ -50,13 +65,13 @@
 \@titlegraphic \\[\TP@titlegraphictotitledistance] \centering
 \color{titlefgcolor} {\bfseries \Huge \sc \@title \par}
 \vspace*{1em}
-{\huge \@author \par} \vspace*{1em} {\LARGE \@institute}
+{\huge \@author \par} \vspace*{1em} {\small \@institute}
 }}
 \makeatother
 
 %\institute{contact author: sik@eia.udg.edu}
-\usetheme{Autumn}\usecolorstyle[colorPalette=BrownBlueOrange]{Germany}
-%\usetheme{Simple} \usecolorstyle[colorOne=udgColor]{Denmark} 
+%\usetheme{Autumn}\usecolorstyle[colorPalette=BrownBlueOrange]{Germany}
+\usetheme{Autumn} \usecolorstyle[colorOne=udgColor,colorTwo=udgColor!15!white]{Germany} 
 
 \input{defineBreastGTlabelColors.tex}
 
@@ -95,7 +110,7 @@ This subset has been complemented with multi-label \ac{gt}, as illustrated in fi
   \begin{multicols*}{3}
     \begin{itemize}
 
-      \item Goal, analyze tissue classes separability based on:
+      \item Goal: to analyze tissue classes separability based on
         \begin{itemize}
           \item Bayesian framework for tissue discrimination (see eq.\,\ref{eq:bayes}).
           \item low-level descriptors based on \ac{sift}
@@ -116,9 +131,9 @@ This subset has been complemented with multi-label \ac{gt}, as illustrated in fi
         \vfill
         \columnbreak
         
-      \item Qualitative analysis can be found in fig.\,\ref{fig:model}-\ref{fig:MAP}.
+      \item Qualitative analysis can be found in fig.\,\ref{fig:model},\ref{fig:prior} and \ref{fig:MAP}.
       \item Quantitative analysis can be found in fig.\,\ref{fig:llConfMatrix},
-            where a comparison with intensity feature can be found. The overall sensitivity for the intensity case is $16.6\pm27.5\%$, whereas for the \ac{sift} case is $18.8\pm17.2\%$ which show that both feature spaces produce similar results.
+            where a comparison with intensity feature can be found. The overall sensitivity for the intensity case is $16.6\pm27.5\%$, whereas for the \ac{sift} case is $18.8\pm17.2\%$ which shows that both feature spaces produce similar results.
     
     \end{itemize}
     
@@ -164,7 +179,7 @@ This subset has been complemented with multi-label \ac{gt}, as illustrated in fi
 
   \begin{itemize}
 
-    \item Goal, analyze tissue classes separability based on:
+    \item Goal: to analyze tissue classes separability based on
       \begin{itemize}
         \item Classification framework for tissue discrimination (\ac{rbf}-\ac{svm}).
         \item High-level descriptors based on \ac{bof}-\ac{sift}.
@@ -216,6 +231,5 @@ The fact that \ac{sift} and intensity descriptors produce similar results, encou
 
 }
 %\note[targetoffsetx=24cm, targetoffsety=-9cm,radius=8cm,width=.75\textwidth,innersep=.4cm]{You can...}
-\note[targetoffsetx=-8cm,targetoffsety=-5cm,radius=8cm,width=.8\textwidth,innersep=.4cm]{\centering This work was partially supported by the Spanish Science and Innovation grant nb.\,TIN2012-37171-C02-01 and TTIN2012-37171-C02-02, and the Regional Council of
-Burgundy.}
+\note[targetoffsetx=-8cm,targetoffsety=-5cm,radius=8cm,width=.8\textwidth,innersep=.4cm]{\centering This work was partially supported by the Spanish Science and Innovation grants nb.\,TIN2012-37171-C02-01 and TIN2012-37171-C02-02, and the Regional Council of Burgundy.}
 \end{document}
