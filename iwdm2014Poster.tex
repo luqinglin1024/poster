@@ -36,7 +36,7 @@
                                           Elsa~P{\'e}rez\textsuperscript{4},
                                           Domenec Puig\textsuperscript{5},
                                           Robert  Mart{\'i}\textsuperscript{1},
-                                          Arnau Oliver\textsuperscript{1,2}
+                                          Arnau Oliver\textsuperscript{1}
                                           and Joan Mart{\'i}\textsuperscript{1}}}
 \institute{ 
   \textsuperscript{1}Computer Vision and Robotics Group, University of Girona, Spain.
@@ -112,15 +112,15 @@ This subset has been complemented with multi-label \ac{gt}, as illustrated in fi
 
       \item Goal: to analyze tissue classes separability based on
         \begin{itemize}
-          \item Bayesian framework for tissue discrimination (see eq.\,\ref{eq:bayes}).
+          \item Bayesian framework for tissue discrimination (see eq.\,1).%\ref{eq:bayes}).
           \item low-level descriptors based on \ac{sift}
         \end{itemize}
     \end{itemize}
 
-    \begin{equation}
-      P(\omega|\bar{x}) = \frac{P(\bar{x}|\omega)\cdot P(\omega)}{P(\bar{x})}
+    \begin{equation*}
+      P(\omega|\bar{x}) = \frac{P(\bar{x}|\omega)\cdot P(\omega)}{P(\bar{x})} \qquad \text{(1)}
       \label{eq:bayes}
-    \end{equation}
+    \end{equation*}
 
     \begin{itemize}
       \item Feature Description.
@@ -164,7 +164,7 @@ This subset has been complemented with multi-label \ac{gt}, as illustrated in fi
 }
 
 \column{0.305} \block{}{
-\begin{tikzfigure}[Confusion matrix showing quantitative results obtained from ($10.000\text{ samples} \times 10 \text{ classes}) \times 5 \text{ folds}$ cross-validation. 
+\begin{tikzfigure}[Confusion matrix showing quantitative results obtained from ($10.000\text{ samples} \times 10 \text{ classes}) \times 5\text{-fold}$ cross-validation. 
 ]
 \input{./figures/lowLevelConfMatrix/lowLevelConfusionMatrix.tex}
   \label{fig:llConfMatrix}
@@ -175,7 +175,7 @@ This subset has been complemented with multi-label \ac{gt}, as illustrated in fi
 
 \block{\ac{sift} as a high-level descriptor using \acf{bof}, tested using \ac{rbf}-\ac{svm} classifier}{
   \begin{multicols*}{3}
-  Texture is an area property related to spatial repetition of structures, statistical similarities, or both.
+  %Texture is an area property related to spatial repetition of structures, statistical similarities, or both.
 
   \begin{itemize}
 
@@ -191,7 +191,7 @@ This subset has been complemented with multi-label \ac{gt}, as illustrated in fi
         \item Extract superpixels (\ac{qs}).
         \item Occurrence study to describe each superpixel.
       \end{itemize}
-
+      \vspace{1pt}
     \item Quantitative analysis can be found in fig.\,\ref{fig:hlConfMatrix},
           The sensitivity achieved is $29\pm3.6\%$ for the intensity and $33.5\pm2.3\%$ for \ac{sift}.
   \end{itemize}
@@ -215,7 +215,7 @@ This subset has been complemented with multi-label \ac{gt}, as illustrated in fi
 }
 
 \column{0.40} \block{}{
-\begin{tikzfigure}[Confusion matrix showing quantitative results obtained from ($1\text{ samples} \times 8 \text{ classes} \times 3 \text{ coodebooks}) \times 20 \text{ folds}$ cross-validation.
+\begin{tikzfigure}[Confusion matrix showing quantitative results obtained from ($1\text{ samples} \times 8 \text{ classes} \times 3 \text{ codebooks}) \times 20\text{-fold}$ cross-validation.
   ]
 \input{./figures/highLevelConfMatrix/highLevelConfusionMatrix.tex}
 \label{fig:hlConfMatrix}
