@@ -1,0 +1,31 @@
+\documentclass[border=2pt]{standalone}
+\usepackage{tikz}
+
+
+\input{../../defineBreastGTlabelColors.tex}
+
+\begin{document}
+ \begin{tikzpicture}
+\tikzset{myNode/.style=
+{anchor=north west,rectangle,
+node distance=5pt,
+minimum width=8pt,minimum height=8pt,
+inner sep=0,
+}}
+
+\newcommand\mySize{6cm}
+
+\node[myNode, label=below:\small Background] (bgNode) at (0,0) {\includegraphics[width=\mySize]{gtDistro/000.png}};
+\node[myNode, right=of bgNode, label=below:\small tiny Air or lungs] (airNode) {\includegraphics[width=\mySize]{gtDistro/001.png}};
+\node[myNode, right=of airNode, label=below:\small Chest wall] (cwNode) {\includegraphics[width=\mySize]{gtDistro/002.png}};
+
+\node[myNode, right=of cwNode, label=below:\small Rib] (ribNode) {\includegraphics[width=\mySize]{gtDistro/003.png}};
+
+\node[myNode, below=40pt of bgNode, label=below:\small Fibro-glandular] (fibNode) {\includegraphics[width=\mySize]{gtDistro/005.png}};
+
+\node[myNode, right=of fibNode, label=below:\small Adipose tissue] (fatNode) {\includegraphics[width=\mySize]{gtDistro/006.png}};
+\node[myNode, right=of fatNode, label=below:\small Skin layers] (skNode) {\includegraphics[width=\mySize]{gtDistro/007.png}};
+\node[myNode, right=of skNode, label=below:\small Lesion] (lesionNode) {\includegraphics[width=\mySize]{gtDistro/128.png}};
+
+\end{tikzpicture} 
+\end{document}

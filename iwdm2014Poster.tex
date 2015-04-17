@@ -1,0 +1,235 @@
+\documentclass[25pt, a0paper, portrait, margin=0mm, innermargin=15mm, blockverticalspace=10mm, colspace=10mm, subcolspace=8mm]{tikzposter}
+
+\usepackage{amsmath}
+\usepackage{epsf,graphicx,subfig}
+
+\usepackage{amsmath}
+\usepackage{epsf,graphicx,subfig}
+\setcounter{tocdepth}{3}
+\usepackage{xcolor}
+\usepackage{lineno}
+\usepackage[nolist]{acronym}
+\usepackage{amssymb,amsmath}
+\usepackage{standalone}
+\usepackage{multicol}
+\usepackage{tikz}
+\usepackage{pgfplots,pgfplotstable}
+\usepackage{scalefnt}
+\usetikzlibrary{positioning}
+\usetikzlibrary{pgfplots.groupplots}
+\usepackage{url}
+\pgfplotsset{compat=1.8}
+
+\usepackage{adjustbox}
+\usepackage{epstopdf}
+
+\input{includePgfplotsWorkaround.tex}
+
+
+\definecolor{udgColor}{RGB}{82,119,213}
+
+\title{\parbox{0.8\linewidth}{\centering \acs{sift} texture description for understanding breast ultrasound images}}
+\author{\parbox{0.8\linewidth}{\centering Joan Massich\textsuperscript{1,2},
+                                          Fabrice Meriaudeau\textsuperscript{2}, 
+                                          Melcior Sent{\'i}s\textsuperscript{3},
+                                          Sergi Ganau\textsuperscript{3},
+                                          Elsa~P{\'e}rez\textsuperscript{4},
+                                          Domenec Puig\textsuperscript{5},
+                                          Robert  Mart{\'i}\textsuperscript{1},
+                                          Arnau Oliver\textsuperscript{1}
+                                          and Joan Mart{\'i}\textsuperscript{1}}}
+\institute{ 
+  \textsuperscript{1}Computer Vision and Robotics Group, University of Girona, Spain.
+  \textsuperscript{2}Laboratoire Le2i-UMR CNRS, University of Burgundy,  Le Creusot, France.
+  \textsuperscript{3}Department of Breast and Gynecological Radiology,  UDIAT-Diagnostic Center, Parc Taul{\'i} Corporation, Sabadell, Spain.
+  \textsuperscript{4}Department of Radiology, Hospital Josep Trueta of Girona, Spain.
+  \textsuperscript{5}Department of Computer Engineering and Mathematics, University Rovira i Virgili, Tarragona, Spain.
+}
+\titlegraphic{
+\includegraphics[width=5cm]{figures/logos/udg.png}
+ \hfill 
+\includegraphics[width=5cm]{figures/logos/uB.pdf}
+\\% \vspace{5pt} \\
+\hfill
+\\
+\includegraphics[width=5cm]{figures/logos/urv.pdf}
+ \hfill 
+\includegraphics[width=5cm]{figures/logos/ics.png}
+}
+
+
+% Fix the logos positioning
+\makeatletter
+\def\TP@titlegraphictotitledistance{-9cm}   % -9 can be adjusted to one's need
+\settitle{ \centering \vbox{
+\@titlegraphic \\[\TP@titlegraphictotitledistance] \centering
+\color{titlefgcolor} {\bfseries \Huge \sc \@title \par}
+\vspace*{1em}
+{\huge \@author \par} \vspace*{1em} {\small \@institute}
+}}
+\makeatother
+
+%\institute{contact author: sik@eia.udg.edu}
+%\usetheme{Autumn}\usecolorstyle[colorPalette=BrownBlueOrange]{Germany}
+\usetheme{Autumn} \usecolorstyle[colorOne=udgColor,colorTwo=udgColor!15!white]{Germany} 
+
+\input{defineBreastGTlabelColors.tex}
+
+\begin{document}\maketitle
+\input{acronyms.tex}
+\acresetall
+
+\graphicspath{{figures/paperFigures/}}
+
+
+\begin{columns} 
+  \column{0.6}
+\block{Summary}{
+Texture is a powerful cue for describing structures that show a high degree of similarity in their image intensity patterns. 
+This work describes the use of \acf{sift}, both as low-level and high-level descriptors, applied to differentiate the tissues present in breast US images. 
+For such a task, a subset of 16 images has been randomly selected from a larger dataset of 700 \ac{us} images acquired at the \emph{UDIAT Diagnostic Centre of Parc Taul\'{i}} in Sabadell (Catalunya), between 2010 and 2012.
+This subset has been complemented with multi-label \ac{gt}, as illustrated in figure~\ref{fig:dataExample}.
+
+%Experimental results are provided showing the validity of the proposed approach for describing the tissues in breast US images.
+
+}
+  \column{0.4}
+\block{}{
+\begin{tikzfigure}[Data sample: image, accompanying multi-label \ac{gt}, tissue label \ac{gt} color-coding.]
+  \centering
+  \input{./figures/gtExample/gtExample.tex}
+  \label{fig:dataExample}
+\end{tikzfigure}
+}
+\end{columns}
+%\begin{keywords}
+%breast cancer, ultrasound, texture, SIFT
+%\end{keywords}
+
+\block{\ac{sift} as a low-level descriptor, tested using \ac{map}}{
+  \begin{multicols*}{3}
+    \begin{itemize}
+
+      \item Goal: to analyze tissue classes separability based on
+        \begin{itemize}
+          \item Bayesian framework for tissue discrimination (see eq.\,1).%\ref{eq:bayes}).
+          \item low-level descriptors based on \ac{sift}
+        \end{itemize}
+    \end{itemize}
+
+    \begin{equation*}
+      P(\omega|\bar{x}) = \frac{P(\bar{x}|\omega)\cdot P(\omega)}{P(\bar{x})} \qquad \text{(1)}
+      \label{eq:bayes}
+    \end{equation*}
+
+    \begin{itemize}
+      \item Feature Description.
+        \begin{itemize}
+          \item Extract \ac{sift} descriptors at all pixel positions.
+          \item Project the $128D$ \ac{sift} to $2D$ using \ac{pca}.
+        \end{itemize}
+        \vfill
+        \columnbreak
+        
+      \item Qualitative analysis can be found in fig.\,\ref{fig:model},\ref{fig:prior} and \ref{fig:MAP}.
+      \item Quantitative analysis can be found in fig.\,\ref{fig:llConfMatrix},
+            where a comparison with intensity feature can be found. The overall sensitivity for the intensity case is $16.6\pm27.5\%$, whereas for the \ac{sift} case is $18.8\pm17.2\%$ which shows that both feature spaces produce similar results.
+    
+    \end{itemize}
+    
+  \end{multicols*}
+}
+
+\begin{columns} 
+
+\column{0.34} \block{}{
+\begin{tikzfigure}[Distribution of the \acs{sift} descriptors for some classes in the \ac{gt}.]
+\input{./figures/lowLevelModelProbability/lowLevelModelProbability.tex}
+  \label{fig:model}
+\end{tikzfigure}
+}
+
+\column{0.14} \block{}{
+\begin{tikzfigure}[Data prior knowledge.] %Class tiussue and feature priors.]
+  \input{./figures/lowLevelPrior/lowLevelPrior.tex}
+  \label{fig:prior}
+\end{tikzfigure}
+} 
+
+\column{0.215} \block{}{
+\begin{tikzfigure}[ Qualitative evaluation of the \ac{map} labeling of the feature space.]
+\input{./figures/lowLevelMAP/lowLevelMAP.tex}
+  \label{fig:MAP}
+\end{tikzfigure}
+}
+
+\column{0.305} \block{}{
+\begin{tikzfigure}[Confusion matrix showing quantitative results obtained from ($10.000\text{ samples} \times 10 \text{ classes}) \times 5\text{-fold}$ cross-validation. 
+]
+\input{./figures/lowLevelConfMatrix/lowLevelConfusionMatrix.tex}
+  \label{fig:llConfMatrix}
+\end{tikzfigure}
+} 
+
+\end{columns}
+
+\block{\ac{sift} as a high-level descriptor using \acf{bof}, tested using \ac{rbf}-\ac{svm} classifier}{
+  \begin{multicols*}{3}
+  %Texture is an area property related to spatial repetition of structures, statistical similarities, or both.
+
+  \begin{itemize}
+
+    \item Goal: to analyze tissue classes separability based on
+      \begin{itemize}
+        \item Classification framework for tissue discrimination (\ac{rbf}-\ac{svm}).
+        \item High-level descriptors based on \ac{bof}-\ac{sift}.
+      \end{itemize}
+
+    \item Feature Description (see fig.\,\ref{fig:bof}).
+      \begin{itemize}
+        \item Generate a codebook of the features (k-means, $k=36$).
+        \item Extract superpixels (\ac{qs}).
+        \item Occurrence study to describe each superpixel.
+      \end{itemize}
+      \vspace{1pt}
+    \item Quantitative analysis can be found in fig.\,\ref{fig:hlConfMatrix},
+          The sensitivity achieved is $29\pm3.6\%$ for the intensity and $33.5\pm2.3\%$ for \ac{sift}.
+  \end{itemize}
+
+%  In order to produce quantitative results, dataset of superpixels is generated based on the images and the multi-label \ac{gt} available.
+%  For a superpixel to be eligible, an area larger than $75\%$ need to belong to a single \ac{gt} label. The resulting dataset contains 20 folds of 8 superpixels (one per class). 
+
+%  The experiment has been repeated for different coodebooks to take into account the variability of the coodebook within the results. 
+%  Figure~\ref{fig:hlConfMatrix} compares the results of using \ac{bof} based on \ac{sift} or intensity for encoding \ac{us} texture. 
+%  The sensitivity achieved is $29\pm3.6\%$ for the intenisty and $33.5\pm2.3\%$ for \ac{sift}.
+  \end{multicols*}
+}
+
+\begin{columns}
+\column{0.60} \block{}{
+\begin{tikzfigure}[ \acs{sift}-\acs{bof} descriptors qualitative analysis.
+ Image example; dictionary example; dictionary occurrence associated with the highlighted superpixels.]
+\input{./figures/backOfFeatures/backOfFeatures.tex} 
+\label{fig:bof}
+\end{tikzfigure}
+}
+
+\column{0.40} \block{}{
+\begin{tikzfigure}[Confusion matrix showing quantitative results obtained from ($1\text{ samples} \times 8 \text{ classes} \times 3 \text{ codebooks}) \times 20\text{-fold}$ cross-validation.
+  ]
+\input{./figures/highLevelConfMatrix/highLevelConfusionMatrix.tex}
+\label{fig:hlConfMatrix}
+\end{tikzfigure}
+} 
+\end{columns}
+
+%\block[titleoffsety=-1cm,bodyoffsety=-1cm]{Sample document}{This poster...}
+\block{Conclusion}{
+The present study was designed to explore the usage of \ac{sift} feature space as a texture for characterizing the different tissues present in a breast \ac{us} image. 
+The usage of \ac{sift} either as a low-level or high-level texture descriptor has been evaluated in comparison to intensity features, which are the features most commonly used.
+The fact that \ac{sift} and intensity descriptors produce similar results, encourages further studies on using \ac{sift} texture descriptors characterizing breast tissues in \ac{us} images.
+
+}
+%\note[targetoffsetx=24cm, targetoffsety=-9cm,radius=8cm,width=.75\textwidth,innersep=.4cm]{You can...}
+\note[targetoffsetx=-8cm,targetoffsety=-5cm,radius=8cm,width=.8\textwidth,innersep=.4cm]{\centering This work was partially supported by the Spanish Science and Innovation grants nb.\,TIN2012-37171-C02-01 and TIN2012-37171-C02-02, and the Regional Council of Burgundy.}
+\end{document}
