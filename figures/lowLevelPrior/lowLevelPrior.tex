@@ -1,0 +1,79 @@
+\documentclass[border=2pt]{standalone}
+\usepackage{tikz}
+\usepackage{pgfplots,pgfplotstable}
+\pgfplotsset{compat=1.4}
+\usetikzlibrary{pgfplots.groupplots}
+
+%\graphicspath{{../paperFigures/}}
+\input{../../defineBreastGTlabelColors.tex}
+
+\begin{document}
+
+\pgfplotstableread[col sep=comma]{
+Class, Occurrence, Pw
+%-------------------------------------
+Bg,     518738,	0.207
+Lungs,  447153,	0.178
+CWall,  134165,	0.054
+Ribs,   22541, 	0.009
+Pect,	  182468,	0.073
+FGlan,  525238,	0.210
+Fat,    413118,	0.165
+Skin,   17732, 	0.007
+Lsion,  163848,	0.065
+Bound,  81082, 	0.032
+}\occurrenceDataTable
+
+\pgfplotscreateplotcyclelist{colorbrewer-RYB}{
+{bgColor!50!black,fill=bgColor},
+{lungColor!50!black,fill=lungColor},
+{chestWallColor!50!black,fill=chestWallColor},
+{ribColor!50!black,fill=ribColor},
+{pectoralColor!50!black,fill=pectoralColor},
+{fibroGlandColor!50!black,fill=fibroGlandColor},
+{fatColor!50!black,fill=fatColor},
+{skinColor!50!black,fill=skinColor},
+{lesionColor!50!black,fill=lesionColor},
+{boundaryColor!50!black,fill=boundaryColor},
+}
+
+\pgfplotsset{
+    select row/.style={
+        x filter/.code={\ifnum\coordindex=#1\else\def\pgfmathresult{}\fi}
+    }
+}
+
+\newcommand\mySize{6cm} 
+
+\begin{tikzpicture}
+\begin{axis}[ 
+              ybar=0pt,
+              /pgf/bar shift=0pt,scale only axis,
+              width=\mySize,
+              ymin=0,
+              xtick=\empty,
+              tickpos=left,
+              scaled y ticks=base 10:2,
+              cycle list name=colorbrewer-RYB,
+              bar width=14pt,
+              ymajorgrids,
+              font=\tiny,
+              title=\small $P(\omega)$,
+              name=pwAxis,
+            ] 
+
+
+\pgfplotsinvokeforeach  {0,...,9}{
+  \addplot table [ x expr=\coordindex, select row=#1, y=Pw] {\occurrenceDataTable};
+}
+\end{axis}
+
+\node at (pwAxis.south) 
+      [ anchor=north,
+        inner sep=0,
+        yshift=-10pt,
+%        draw,
+        label=below:\small $P(\bar{x})$,
+      ]{\includegraphics[height=\mySize]{siftOccurrences2}};
+\end{tikzpicture}
+\end{document}
